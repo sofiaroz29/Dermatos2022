@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dérmatos</title>
+
+    <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">    
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="img/logopreba.png"></a>
+            <div class="nav-links" id="navLinks">
+              <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="">INICIO</a></li>
+                    <li><a href="">INFORMACIÓN</a></li>
+                    <li><a href="">QUIENES SOMOS</a></li>
+                    <li><a href="">LOG IN</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+    
+    <div class="text-box">
+        <h1>DERMATOS</h1>
+        <p>Sitio Web diseñado para el análisis y la detección de cancer de piel mediante imagenes.</p>
+        <a href="" class="hero-btn">REALIZAR ANÁLISIS</a>
+    </div>
+
+    </section>
+
+    <section class="qnsomos">
+        <h1>Quienes Somos</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam voluptate repudiandae nisi, molestias dignissimos impedit quas laudantium nihil officia provident eligendi blanditiis!</p>
+    </section>
+
+
+    <script>
+
+        var navLinks = document.getElementById("navLinks");
+
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+
+        function hideMemnu(){
+            navLinks.syle.right = "-200px";
+        }
+
+    </script>
+
+
+</body>
+</html>
