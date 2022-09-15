@@ -10,23 +10,23 @@ const Usuario = database.define("usuarios", {
   },
 
   nombre: {
-    type: DataTypes.STRING,
-    allowNull = false,
+    type: DataTypes.STRING
   },
 
   apellido: {
-    type: DataTypes.STRING,
-    allowNull = false,
+    type: DataTypes.STRING
+  },
+
+  email: {
+    type: DataTypes.STRING
   },
 
   edad: {
-    type: DataTypes.INTEGER,
-    allowNull = false,
+    type: DataTypes.INTEGER
   },
 
   contraseña: {
-    type: DataTypes.INTEGER,
-    allowNull = false,
+    type: DataTypes.INTEGER
   }
 
 
