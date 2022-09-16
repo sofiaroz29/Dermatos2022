@@ -4,20 +4,29 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.header{
+header{
     width: 100%;
-    min-height: 100vh;
-    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(img/fondoc.jpg);
-    background-position: center;
-    background-size: cover;
-    position: relative;    
+    height: 100px;
+    position: fixed;    
+    /* background-color: ; */
+    background: linear-gradient(rgb(41, 42, 82, 0.7),rgb(190, 190, 226, 0.0));
+    text-align: center;
 }
-
 
 header .container{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.hero{    
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 800px;    
+    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(img/fondoc.jpg);   
+    background-position: center;
+    background-size: cover;
 }
 
 nav{
@@ -138,10 +147,13 @@ nav .fa{
 }
 
 .informacion{
-    width: 80%;
+    width: 100%;
+    height: 600px;
     margin: auto;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 150px;
+    text-size-adjust: 80%;
+    background: rgb(190, 190, 226);
 }
 
 h1{
@@ -161,6 +173,8 @@ p{
     margin-top: 5%;
     display: flex;
     justify-content: space-between;
+    margin-left: 35px;
+    margin-right: 35px;
 }
 
 .informacion-col{
@@ -246,7 +260,7 @@ h3{
     opacity: 1;
 }
 
-.footer{
+/* .footer{
     width: 100%;
     text-align: center;
     padding: 30px 0;
@@ -263,4 +277,4 @@ footer p{
     margin: 0;
     padding: 12px;
     color: rgb(0,0,0,0.7);
-}
+} */
