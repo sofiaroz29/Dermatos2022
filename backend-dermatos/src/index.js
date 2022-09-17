@@ -11,9 +11,10 @@ async function main() {
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }
-    await database.sync({force: false});
+    await database.sync({alter: true});
     app.listen(app.get('port'));
     console.log("Server on port 3000");
 }
+
 
 main();
