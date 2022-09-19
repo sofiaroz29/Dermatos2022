@@ -10,25 +10,25 @@ const Reporte = database.define("reportes", {
   },
 
   parte_del_cuerpo: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
 
   sintomas: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
 
   porcentaje: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
   },
 
   imagen: {
-    type: DataTypes.STRING
+    type: DataTypes.BLOB("long"),
   },
 
   id_usuario: {
       type: DataTypes.INTEGER,
-      foreignKey: true
-  }
+      foreignKey: true,
+  },
 
   
 
