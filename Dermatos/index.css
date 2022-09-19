@@ -161,7 +161,7 @@ h1{
     font-weight: 600;
 }
 
-p{
+.informacion p{
     color: rgba(0, 0, 0, 0.7);
     font-size: 14px;
     font-weight: 300;
@@ -204,19 +204,31 @@ h3{
 }
 
 .qnsomos{
-    width: 80%;
-    margin: auto;
+    height: 700px;
+    width: 100%;
+    text-size-adjust: 60%;
     text-align: center;
-    padding-top: 50px;
+    background: rgb(190, 190, 226);
+    padding-top: 100px;
 }
+
 
 .qnsomos-col{
     flex-basis: 32%;
     border-radius: 10px;
-    margin-bottom: 30px;
+    /* margin-bottom: 80px; */
     position: relative;
     overflow: hidden;
 }
+
+.qnsomos p{
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19px;
+    padding: 3px;
+}
+
 
 .qnsomos-col img{
     width: 100%;
@@ -258,6 +270,95 @@ h3{
 .layer:hover h3{
     bottom: 49%;
     opacity: 1;
+}
+
+.login{
+    width: 500px;
+    /* background: #24303c; */
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    /* font-family: 'calibri'; */
+    color: white;
+    box-shadow: 7px 13px 37px #000;
+    
+    background:rgb(39, 2, 31);
+    /* width: 400px;
+    padding: 30px;;
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
+    position: center;
+    padding-top: 100px;  
+    padding-bottom: 100px;  
+    box-shadow: 7px 13px 37px #000;
+    */
+}
+
+.login .botons{
+    width: 30%;
+    /* background: #1f53c5; */
+    border: none;
+    padding: 9px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+    margin-left: 35%;
+
+    /* display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px; */
+    background: rgba(83, 36, 85, 0.7);
+    /* position: relative;
+    cursor: pointer; */
+}
+
+.login .botons:hover{
+    border: 1px solid #af9f9f;
+    background: #0e050c;
+    transition: 1s;
+}
+
+.login h1{
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.controls{
+    width: 400px;
+    background: rgb(41, 42, 82, 0.7);
+    border: 1px solid #af9f9f;
+    padding: 7px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    margin-left: 45px;
+    font-size: 18px;
+    color: white;
+    /* padding: 12px 34px; */
+    /* border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 18px; */
+}
+
+.login p{
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    line-break: 40px;
+}
+
+.login a{
+    color: white;
+    text-decoration: none;
+}
+
+.login a:hover{
+    color: white;
+    text-decoration: underline;
 }
 
 /* .footer{
