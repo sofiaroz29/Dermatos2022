@@ -22,7 +22,7 @@ const Reporte = database.define("reportes", {
   },
 
   imagen: {
-    type: DataTypes.STRING,
+    type: DataTypes.BLOB("long"),
   },
 
   id_usuario: {
