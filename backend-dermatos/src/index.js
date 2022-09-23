@@ -1,8 +1,10 @@
 import app from "./app.js";
 import database from "../config/database.js";
+import multer from "multer";
 
 import '../models/usuarios.js';
 import '../models/reporte.js';
+
 
 async function main() {
     try {

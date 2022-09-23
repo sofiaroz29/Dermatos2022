@@ -14,7 +14,19 @@ const Reporte = database.define("reportes", {
   },
 
   sintomas: {
+    type: DataTypes.TEXT,
+  },
+
+  antecedentes: {
     type: DataTypes.STRING,
+  },
+
+  conducta_sol: {
+    type: DataTypes.STRING,
+  },
+
+  fototipos: {
+    type: DataTypes.INTEGER,
   },
 
   porcentaje: {
@@ -22,18 +34,13 @@ const Reporte = database.define("reportes", {
   },
 
   imagen: {
-    type: DataTypes.BLOB("long"),
+    type: DataTypes.STRING,
   },
 
   id_usuario: {
       type: DataTypes.INTEGER,
       foreignKey: true,
-  },
-
-  
-
-}, {
-  timestamps: false
+  }
 });
 
 
