@@ -269,11 +269,18 @@ h3{
     border-radius: 10px;
     margin-bottom: 5%;
     text-align: left;
+    margin-top: 0px;
+}
+
+.acercade p{
+    margin-bottom: 0px;
 }
 
 .acercade-col img{
-    width: 100%;
+    width: 300px;
+    height: 200px;
     border-radius: 10px;
+    margin-top: -30px;
 }
 
 .acercade-col p{
@@ -281,8 +288,8 @@ h3{
 }
 
 .acercade-col h3{
-    margin-top: 16px;
-    margin-bottom: 15px;
+    margin-top: 11px;
+    margin-bottom: 10px;
     text-align: left;
 }
 
@@ -351,10 +358,10 @@ h3{
 }
 
 
-/* quienes somos */
+/* analisis */
 
 .sub-header{
-    height: 40vh;
+    height: 30vh;
     width: 100%;
     background-image: linear-gradient(rgba(4,5,30,0.7),rgba(4,9,30,0.7)), url(img/fondob.jpg);
     background-position: center;
@@ -364,28 +371,29 @@ h3{
 }
 
 .sub-header h1{
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
-.aboutus{
+.analisis{
     width: 80%;
     margin: auto;
-    padding-top: 50px;
+    padding-top: 40px;
     padding-bottom: 30px;
 }
 
-.aboutus-col{
+.analisis-col{
     flex-basis: 48%;
     padding: 30px 2px;
 }
 
-.aboutus-col img{
+.analisis-col img{
     width: 100%;
+    margin-top: -10px;
 }
 
-.aboutus h1{
+.analisis h1{
     color: black;
-    margin-top: 20px;
+    margin-top: -10px;
     padding-top: 0;
 }
 
@@ -486,8 +494,6 @@ h3{
     color: white;
     text-decoration: underline;
 }
-
-
 
 .footer{
     width: 100%;
