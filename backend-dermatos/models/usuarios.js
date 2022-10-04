@@ -24,10 +24,6 @@ const Usuario = database.define("usuarios", {
     allowNull: false,
   },
 
-  edad: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
 
   contrasenia: {
     type: DataTypes.STRING,

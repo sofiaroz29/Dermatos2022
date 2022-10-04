@@ -1,13 +1,13 @@
 import express from "express";
 import morgan from "morgan";
-import bodyParser from "body-parser";
+import multer from "multer";
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
 
-
+app.use(multer().array());
+app.use('/Images', express.static('./Images'))
 
 import usuarioRoutes from "../routes/usuario.routes.js";
 import reporteRoutes from "../routes/reporte.routes.js";

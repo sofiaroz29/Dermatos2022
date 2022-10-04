@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     }
 });
 
-router.post('/upload', multer({ storage }).single('example'), async (req,res) =>{
+router.post('/upload', async (req,res) =>{
 
     const upload = multer({
         storage: storage,
@@ -32,15 +32,14 @@ router.post('/upload', multer({ storage }).single('example'), async (req,res) =>
     }).single('imagen');
 
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
-    const {imagen} = req.file;
-
+    console.log(req.body);
     const newAnalysisRequest = await Reporte.create({
         parte_del_cuerpo,
         sintomas,
         antecedentes,
         conducta_sol,
         fototipos,
-        imagen: imagen.path,
+        //imagen: path.req.file,
     });
 
     if (!newAnalysisRequest) {
