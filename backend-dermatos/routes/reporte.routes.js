@@ -1,6 +1,5 @@
 import { Router } from "express";
 import multer from "multer";
-import path from "path";
 import  Reporte  from '../models/reporte.js';
 
 const router = Router();
@@ -25,21 +24,25 @@ const upload = multer({
         if(mimeType && extname) {
             return cb(null, true)
         }
-        cb('Give proper files formate to upload')
+        cb('Formato de imagen invalido')
     }
 });
 
 router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
-    console.log(req.body);
+    
+    if (!req.files) {
+        res.send("File was not found");
+        return;
+    }
     const newAnalysisRequest = await Reporte.create({
         parte_del_cuerpo,
         sintomas,
         antecedentes,
         conducta_sol,
         fototipos,
-        imagen: path.req.file,
+        imagen: req.files[0].path,
     });
 
     if (!newAnalysisRequest.imagen) {
