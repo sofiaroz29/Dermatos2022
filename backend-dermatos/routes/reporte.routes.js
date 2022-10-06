@@ -14,22 +14,22 @@ const storage = multer.diskStorage({
     }
 });
 
-router.post('/upload', async (req,res) =>{
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: '1000000' },
+    fileFilter: (req, file, cb) => {
+        const fileTypes = /jpeg|jpg|png|gif|jfif/
+        const mimeType = fileTypes.test(file.mimetype)  
+        const extname = fileTypes.test(path.extname(file.originalname))
 
-    const upload = multer({
-        storage: storage,
-        limits: { fileSize: '1000000' },
-        fileFilter: (req, file, cb) => {
-            const fileTypes = /jpeg|jpg|png|gif/
-            const mimeType = fileTypes.test(file.mimetype)  
-            const extname = fileTypes.test(path.extname(file.originalname))
-    
-            if(mimeType && extname) {
-                return cb(null, true)
-            }
-            cb('Give proper files formate to upload')
+        if(mimeType && extname) {
+            return cb(null, true)
         }
-    }).single('imagen');
+        cb('Give proper files formate to upload')
+    }
+});
+
+router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
     console.log(req.body);
@@ -39,10 +39,10 @@ router.post('/upload', async (req,res) =>{
         antecedentes,
         conducta_sol,
         fototipos,
-        //imagen: path.req.file,
+        imagen: path.req.file,
     });
 
-    if (!newAnalysisRequest) {
+    if (!newAnalysisRequest.imagen) {
         res.json({message: "Debes ingresar una imagen"});
     }
     

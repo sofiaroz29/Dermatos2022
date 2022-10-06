@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use(multer().array());
+//app.use(multer().array());
 app.use('/Images', express.static('./Images'))
 
 import usuarioRoutes from "../routes/usuario.routes.js";
