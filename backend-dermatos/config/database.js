@@ -1,16 +1,16 @@
 import  Sequelize  from 'sequelize';
-import dbConfig from './config.js'
+//import dbConfig from './config.js'
 
 
-const environment = dbConfig["development"];
+//const environment = dbConfig["development"];
 
 const database = new Sequelize(
-  environment.database,
-  environment.username,
-  environment.password,
+  process.env.DB_NAME,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
   {
-    host: environment.host,
-    dialect: environment.dialect,
+    host: process.env.DB_HOST,
+    dialect: "mysql",
   }
 );
 
