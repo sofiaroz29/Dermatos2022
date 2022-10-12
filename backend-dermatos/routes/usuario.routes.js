@@ -1,11 +1,13 @@
 import { Router } from "express";
 import  Usuario  from '../models/usuarios.js';
 import jwt from "jsonwebtoken";
+import multer from "multer";
 
 const router = Router();
 
+
 router.post('/registrarse', async (req,res) => {
-    const {nombre, apellido, email, edad, contrasenia} = req.body;
+    const {nombre, apellido, email, contrasenia} = req.body;
      
     const alreadyExistsUser = await Usuario.findOne({ where: { email } }).catch((err) => {
           console.log("Error: ", err);
@@ -16,6 +18,8 @@ router.post('/registrarse', async (req,res) => {
         return res.status(409).json({ message: "Ya existe un usuario con este email" });
       }
     
+      console.log(req.body);
+
     const newUser = await Usuario.create({
          nombre,
          apellido,
