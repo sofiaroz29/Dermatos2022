@@ -1,6 +1,8 @@
 import  Sequelize  from 'sequelize';
+import dotenv from 'dotenv';
 //import dbConfig from './config.js'
 
+dotenv.config();
 
 //const environment = dbConfig["development"];
 

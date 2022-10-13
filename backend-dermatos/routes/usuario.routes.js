@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const router = Router();
 
-router.post('/registrarse', async (req,res) => {
+router.post('/signup', async (req,res) => {
     const {nombre, apellido, email, edad, contrasenia} = req.body;
      
     const alreadyExistsUser = await Usuario.findOne({ where: { email } }).catch((err) => {
@@ -43,13 +43,17 @@ router.post('/login', async (req,res) => {
     if(userWithEmail.contrasenia !== contrasenia)
       return res.json({message:"Email y/o contraseña son incorrectas"});
     
-    const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET);
+    const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
  
 
    
     res.json({message:"Bienvenido " + userWithEmail.nombre + "!", token: jwtToken});
     
 });
+
+router
 
 
 

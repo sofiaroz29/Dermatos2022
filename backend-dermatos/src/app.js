@@ -6,7 +6,7 @@ dotenv.config()
 
 const app = express();
 
-app.use(express.json());
+
 
 app.use('/Images', express.static('./Images'))
 
@@ -16,6 +16,7 @@ import reporteRoutes from "../routes/reporte.routes.js";
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 app.set('port', process.env.PORT || 3000);
 
 app.use("/api/usuario", usuarioRoutes);
