@@ -1,9 +1,6 @@
 import  Sequelize  from 'sequelize';
 import dotenv from 'dotenv';
 //import dbConfig from './config.js'
-import dotenv from 'dotenv';
-
-dotenv.config({ path: './.env'});
 
 dotenv.config();
 
