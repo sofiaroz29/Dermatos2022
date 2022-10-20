@@ -48,12 +48,12 @@ router.post('/login', async (req,res) => {
     
 
 
-    await bcrypt.compare(contrasenia, userWithEmail.contrasenia){
+    await bcrypt.compare(contrasenia, userWithEmail.contrasenia, function (err,result){
       if(err){
         throw err
       }
 
-      if(res){
+      if(result){
         const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPIRES_IN,
         });
@@ -87,6 +87,32 @@ router.post('/forgotpassword', async (req, res) =>{
   });
 
   const link = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
+  
+  // let transporter = nodemailer.createTransport({
+  //   host: "gmail",
+  //   port: 587,
+  //   secure: false, 
+  //   auth: {
+  //     user: testAccount.user, 
+  //     pass: testAccount.pass, 
+  //   },
+  // });
+
+  // let info = await transporter.sendMail({
+  //   from: '"Dermatos" <noreply@gmail.com>', 
+  //   to: userWithEmail.email, 
+  //   subject: "Restore password", 
+  //   html: link, 
+  // }, function (error, info){
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     console.log("Email sent: " + info.response);
+  //   }
+  // });
+
+
+
   console.log(link);
   res.send('ok');
 
@@ -124,14 +150,21 @@ router.post('/resetpassword/:id/:token', async(req,res) =>{
   try{
     //const verify = jwt.verify(token, secret);
     const encryptedPassword = bcrypt.hash(newpassword, 10);
-    await Usuario.update (
-    {
-      password: encryptedPassword,
-    }, 
-    {
-      where: {id: id},
-    }
-  );
+    console.log(encryptedPassword);
+
+      const updatePassword = await Usuario.update (
+      {
+        contrasenia: encryptedPassword,
+      }, 
+      {
+        where: {id: id},
+      }
+    );
+
+    // const updatePassword = await Usuario.findOne({ where: { id: id } });
+    // updatePassword.contrasenia = encryptedPassword;
+
+    await updatePassword.save();
 
     res.send('Cambio de contraseña exitoso');
 
