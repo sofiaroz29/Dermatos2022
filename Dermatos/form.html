@@ -16,7 +16,7 @@
 <body>
     <section class="sub-headerb">
         <nav>            
-        <a href="index.html"><img src="img/logopreba.png"></a>
+        <a href="index.html"><img src="img/logo.png"></a>
         <i class="fa-solid fa-xmark" onclick="showMenu()"></i>
             <div class="nav-links">
                 <ul>
@@ -31,17 +31,30 @@
     </header>
     
     <!-- FORM -->
-    <section class="login" id="nos">
-        <h1>CONMPLETAR DATOS</h1>
+    <section class="formulario" id="nos">
+        <h1>COMPLETAR DATOS</h1>
         <div class="form">
-            <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo:"><br>
-            <input class="controls"  type="text"  name="apersonales" id="apersonales" placeholder="Antecedentes personales"><br>
-            <input class="controls"  type="text"  name="afamiliares" id="afamiliares" placeholder="Antecedentes familiares"><br>
-            <input class="controls"  type="text"  name="fototipo" id="fototipo" placeholder="Fototipos (color y rasgos de piel)"><br>
-            <input class="controls" type="text"  name="conducta respecto al sol" id="contraseña" placeholder="Conducta respecto al sol: ¿Usa protección solar? ¿En qué horarios se expone al sol?"><br>
-            <input class="">
-            <input class="botons" type="submit" value="Registrar">
-            <p><a href="#">¿Ya tienes una cuenta?</a></p>
+            <div class="row">
+                <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
+                <input class="controls"  type="text"  name="sintomas" id="sintomas" placeholder="Síntomas"><br>
+                </div>
+
+            <div class="row">
+                <input class="controls"  type="text"  name="observaciones" id="observaciones" placeholder="Observaciones"><br>
+                <input class="controls"  type="text"  name="apersonales" id="apersonales" placeholder="Antecedentes personales"><br>
+            </div>
+
+            <div class="row">
+                <input class="controls"  type="text"  name="afamiliares" id="afamiliares" placeholder="Antecedentes familiares"><br>
+                <input class="controls"  type="text"  name="fototipo" id="fototipo" placeholder="Fototipos (color y rasgos de piel)"><br>
+            </div>   
+             
+            <div class="row">
+                <input class="controls" type="text"  name="conducta respecto al sol" id="concuctasol" placeholder="Conducta respecto al sol"><br>
+                <input class="controls" type="image" name="foto" value="Subir Foto">
+            </div>     
+            
+            <input class="botons" type="submit" value="Terminado">
         </div>
     </section>
 
