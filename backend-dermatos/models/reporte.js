@@ -29,7 +29,7 @@ const Reporte = database.define("reportes", {
     type: DataTypes.INTEGER,
   },
 
-  porcentaje: {
+  estado: {
     type: DataTypes.INTEGER,
   },
 
@@ -37,10 +37,6 @@ const Reporte = database.define("reportes", {
     type: DataTypes.STRING,
   },
 
-  id_usuario: {
-      type: DataTypes.INTEGER,
-      foreignKey: true,
-  }
 });
 
 

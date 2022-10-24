@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import database from "../config/database.js"; 
+import Reporte from "./reporte.js";
 const { DataTypes } = Sequelize;
 
 const Usuario = database.define("usuarios", {
@@ -35,6 +36,13 @@ const Usuario = database.define("usuarios", {
   timestamps: false
 });
 
+
+Usuario.hasMany(Reporte, {
+  foreignkey: "id_usuario",
+  sourceKey: "id",
+});
+
+Reporte.belongsTo(Usuario, { foreignkey: "projectId", targetId: "id" });
 
 
 export default Usuario;

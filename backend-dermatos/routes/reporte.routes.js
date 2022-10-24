@@ -55,8 +55,6 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     }
   
 
-
-
 });
 
 
