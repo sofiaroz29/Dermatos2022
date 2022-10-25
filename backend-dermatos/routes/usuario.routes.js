@@ -89,54 +89,57 @@ router.post('/forgotpassword', async (req, res) => {
 
   const link = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
 
-  // let transporter = nodemailer.createTransport({
-  //   host: "gmail",
-  //   port: 587,
-  //   secure: false, 
-  //   auth: {
-  //     user: testAccount.user, 
-  //     pass: testAccount.pass, 
-  //   },
-  // });
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, 
+    auth: {
+      user: process.env.AUTH_USER, 
+      pass: process.env.AUTH_PASS, 
+    },
+  });
 
-  // let info = await transporter.sendMail({
-  //   from: '"Dermatos" <noreply@gmail.com>', 
-  //   to: userWithEmail.email, 
-  //   subject: "Restaurar contraseñia", 
-  //   html: link, 
-  // }, function (error, info){
-  //   if (error) {
-  //     console.log(error);
-  //   } else {
-  //     console.log("Ya se ha enviado el email: " + info.response);
-  //   }
-  // });
+  let info = await transporter.sendMail({
+    from: process.env.AUTH_USER, 
+    to: userWithEmail.email, 
+    subject: "Restaurar contraseñia", 
+    html: `
+    <h3>Entre en el link de abajo para cambiar su contraseña</h3>
+    <p>${link}/ </p>` , 
+  }, function (error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      res.send("Ya se ha enviado el email: " + info.response);
+    }
+  });
 
 
 
   console.log(link);
-  res.send('ok');
+  res.send("Ya se ha enviado el email");
 
 });
 
-router.get('/resetpassword/:id/:token', async (req, res) => {
-  const { id, token } = req.params;
+// router.get('/resetpassword/:id/:token', async (req, res) => {
+//   const { id, token } = req.params;
 
-  const userWithEmail = await Usuario.findOne({ where: { id } }).catch((err) => {
-    console.log("Error: ", err);
-  });
+//   const userWithEmail = await Usuario.findOne({ where: { id } }).catch((err) => {
+//     console.log("Error: ", err);
+//   });
 
-  const secret = process.env.JWT_SECRET + userWithEmail.contrasenia;
+//   const secret = process.env.JWT_SECRET + userWithEmail.contrasenia;
 
-  try {
-    const verify = jwt.verify(token, secret);
+//   try {
+//     const verify = jwt.verify(token, secret);
 
-    res.send('verified');
-  } catch (error) {
-    res.send('not verified');
-  }
+//     res.send('verified');
+//   } catch (error) {
+//     res.send('not verified');
+//   }
 
-});
+// });
 
 router.post('/resetpassword/:id/:token', async (req, res) => {
   const { id, token } = req.params;
