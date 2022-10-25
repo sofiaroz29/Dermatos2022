@@ -403,9 +403,9 @@ h3{
 /* analisis */
 
 .sub-header{
-    height: 30vh;
+    height: 100px;
     width: 100%;
-    background-image: linear-gradient(rgba(4,5,30,0.7),rgba(4,9,30,0.7)), url(img/fondob.jpg);
+    background-image: linear-gradient(rgba(4,5,30,0.9),rgba(18, 30, 131)), url(img/fondob.jpg);
     background-position: center;
     background-size: cover;
     text-align: center;
@@ -417,10 +417,13 @@ h3{
 }
 
 .analisis{
-    width: 80%;
+    width: 100%;
     margin: auto;
-    padding-top: 40px;
-    padding-bottom: 30px;
+    margin-top: -50px;
+    /* padding-top: 40px; */
+    /* padding-bottom: 30px; */
+    background-image: linear-gradient(rgba(18, 30, 131),rgba(255, 255, 255)), url(img/degradefondo.jpg);
+    background-size: cover;
 }
 
 /* 
@@ -436,6 +439,7 @@ h3{
 
 .analisis h1{
     color: black;
+    margin-top: 70px;
     /* margin-top: -10px; */
 }
 
@@ -443,8 +447,10 @@ h3{
     color: rgb(3, 6, 31);
     font-weight: 400;
     font-size: 19px;
-    margin-top: 15px;
+    margin-top: 55px;
     margin-bottom: 35px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 /* 
 .aboutus-col p{
@@ -457,6 +463,8 @@ h3{
     color: #f44336;
     font-weight: 549;
     font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .red-btn:hover{
