@@ -1,6 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 import  Reporte  from '../models/reporte.js';
+import path from "path";
 
 const router = Router();
 
