@@ -32,26 +32,55 @@
     </header>
     
     <!-- LOGIN -->
-    <section class="login" id="nos">
-        <h1>LOG IN</h1>
-        <div class="form">
-            <input class="controls"  type="text"  name="nombres" id="nombres" placeholder="Ingrese su Nombre"><br>
-            <input class="controls"  type="text"  name="apellidos" id="apellidos" placeholder="Ingrese su Apellido"><br>
-            <input class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
-            <input class="controls" type="password"  name="contraseña" id="contraseña" placeholder="Ingrese su contraseña"><br>
-            <input class="botons" type="submit" value="Registrar">
-            <p><a href="#">¿Ya tienes una cuenta?</a></p>
-        </div>
-    </section>
+    <div class="container">
+        <div class="square">
+            <div class="login" id="singin">
+                <h1>LOG IN</h1>
+                <form action="#" method="post">
+                    <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
+                    <input required class="controls" type="password"  name="contraseña" id="contraseña" placeholder="Ingrese su contraseña"><br>
+                    <input class="botons" type="submit" value="Ingresar">
+                    
+                    <div class="actions">
+                        <button id="registrarse" type="button">¿Todavía no tienes una cuenta?</button>
+                        <button id="forgotPass" type="button">Recuperar contraseña</button>
+                    </div>
+                </form>
+            </div>
 
-      <!-- FOOTER -->
-    <section class="footer">
-        <p>&copy; DÉRMATOS</p>
-    </section>
+            <div class="registrarse" id="register">
+                <h1>REGISTRARSE</h1>
+                <form action="#" method="post">
+                    <input required class="controls"  type="text"  name="nombres" id="nombres" placeholder="Ingrese su Nombre"><br>
+                    <input required class="controls"  type="text"  name="apellidos" id="apellidos" placeholder="Ingrese su Apellido"><br>
+                    <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
+                    <input required class="controls" type="password"  name="contraseña" id="contraseña" placeholder="Ingrese su contraseña"><br>
+                    <input class="botons" type="submit" value="Registrarse">
+
+                    <div class="actions">
+                        <button id="login" type="button">¿Ya tienes una cuenta?</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="recpass" id="passrecover">
+                <h1>RECUPERAR CONTRASEÑA</h1>
+                <form action="#" method="post">
+                    <p>Se le envara un correo para restablecer la contraseña. Una vez pueda hacerlo, regrese.</p>
+                    <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
+                    <input class="botons" type="submit" value="Enviar">
+
+                    <div class="actions">
+                        <button id="regresar" type="button">Regresar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <!-- JS -->
     <script>
-
         var navLinks = document.getElementById("navLinks");
 
         function showMenu(){
@@ -60,9 +89,53 @@
 
         function hideMemnu(){
             navLinks.syle.right = "-200px";
-        }
+        }     
+        
+        // CODE BELOW: NOT WORKING
+        /*
+        const singin = getElementById("singin");
+        const register = getElementById("register");
+        const passrecover = getElementById("passrecover");
 
+        const forgotPass = getElementById("forgotPass");
+        const login = getElementById("login");
+        const registrarse = getElementById("registrarse");        
+        const regresar = getElementById("regresar");
+        
+        forgotPass.addEventListener("click", () => {
+            singin.visible = false;
+            register.visible = false;
+            passrecover.visible = true;
+        });
+    
+        login.addEventListener("click", () => {
+            forgotPass.style.display = "block";
+            login.style.display = "none";
+            registrarse.style.display = "block";
+            document.title = "log in page";
+        });
+
+        registrarse.addEventListener("click", () => {
+            forgotPass.style.display = "block";
+            login.style.display = "block";
+            registrarse.style.display = "none";            
+            document.title ="register page";
+        });
+
+        regresar.addEventListener("click", () => {
+            forgotPass.style.display = "block";
+            login.style.display = "none";
+            registrarse.style.display = "block";
+            document.title = "log in page";
+        });
+        */
     </script>
+
+    
+    <!-- FOOTER -->
+    <section class="footer">
+        <p>&copy; DÉRMATOS</p>
+    </section>
 
 </body>
 </html>
