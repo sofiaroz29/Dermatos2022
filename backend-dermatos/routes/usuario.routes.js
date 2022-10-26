@@ -103,7 +103,7 @@ router.post('/forgotpassword', async (req, res) => {
   let info = await transporter.sendMail({
     from: process.env.AUTH_USER, 
     to: userWithEmail.email, 
-    subject: "Restaurar contraseñia", 
+    subject: "Restaurar contraseña", 
     html: `
     <h3>Entre en el link de abajo para cambiar su contraseña</h3>
     <p>${link}/ </p>` , 
