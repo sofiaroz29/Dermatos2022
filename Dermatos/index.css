@@ -400,7 +400,8 @@ h3{
 }
 
 
-/* analisis */
+
+/* ANALISIS */
 
 .sub-header{
     height: 100px;
@@ -412,35 +413,17 @@ h3{
     color: #fff;
 }
 
-.sub-header h1{
-    margin-top: 30px;
-}
-
 .analisis{
     width: 100%;
     margin: auto;
     margin-top: -50px;
-    /* padding-top: 40px; */
-    /* padding-bottom: 30px; */
     background-image: linear-gradient(rgba(18, 30, 131),rgba(255, 255, 255)), url(img/degradefondo.jpg);
     background-size: cover;
 }
-
-/* 
-.analisis-col{
-    flex-basis: 48%;
-    padding: 30px 2px;
-} */
-
-/* .analisis-col img{
-    width: 100%;
-    margin-top: -10px;
-} */
-
 .analisis h1{
-    color: black;
+    color: whitesmoke;
     margin-top: 70px;
-    /* margin-top: -10px; */
+    text-shadow: 5px 4px #1b171775;
 }
 
 .analisis p{
@@ -449,13 +432,9 @@ h3{
     font-size: 19px;
     margin-top: 55px;
     margin-bottom: 35px;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 300px;
+    margin-right: 300px;
 }
-/* 
-.aboutus-col p{
-    padding: 15px 0 25px;
-} */
 
 .red-btn{
     border: 1px solid #f44336;
@@ -471,6 +450,17 @@ h3{
     color: #fff;
 }
 
+@media (max-width: 1200px){
+    .analisis p{
+        color: rgb(3, 6, 31);
+        font-weight: 400;
+        font-size: 19px;
+        margin-top: 55px;
+        margin-bottom: 35px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
 
 
 /* FORM */
@@ -496,6 +486,13 @@ h3{
     font-size: 15px;
     color: white;
 }
+
+/* code below not working */
+
+/* .formulario .container #img{
+    margin-left: -100px;
+    margin-right: 100px;
+} */
 
 .formulario .botons{
     width: 30%;
@@ -537,6 +534,19 @@ h3{
 
 .formulario .row{
     margin-top: 1%;
+}
+
+@media (max-width: 1000px) {
+    .formulario{
+        width: 500px;
+        padding: 30px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        box-shadow: 7px 13px 37px #000;  
+        background: rgb(5, 9, 71);
+    }
 }
 
 /* LOG IN */
@@ -646,4 +656,5 @@ h3{
     text-align: center;
     /* padding: 30px 0;     */
     margin-top: 150px;
+    color: rgb(53, 51, 59);
 }
