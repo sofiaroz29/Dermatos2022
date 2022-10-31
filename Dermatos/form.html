@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">   
     <script src="https://kit.fontawesome.com/c408ff2c28.js" crossorigin="anonymous"></script>
+    <script src="login.js"></script>
 
 </head>
 <body>
@@ -28,7 +29,7 @@
             <i class="fa-solid fa-bars"></i>
         </nav>
     </header>
-    
+    `
     <!-- FORM -->
     <section class="formulario" id="nos">
         <h1>COMPLETAR DATOS</h1>
@@ -53,7 +54,8 @@
                 <input class="controls" type="image" name="foto" id="img" value="Subir Foto">
             </div>     
             
-            <input class="botons" type="submit" value="Terminado">
+            <input onclick="save()" class="botons" type="submit" value="Terminado"> 
+            <script src="form.js"></script>
         </div>
     </section>
 
