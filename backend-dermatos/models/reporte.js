@@ -37,6 +37,10 @@ const Reporte = database.define("reportes", {
     type: DataTypes.STRING,
   },
 
+  imgformat: {
+    type: DataTypes.STRING
+  },
+
 });
 
 
