@@ -5,8 +5,9 @@ function save()
     let observ = document.getElementById('observaciones').value
     let person = document.getElementById('apersonales').value
     let fami = document.getElementById('afamiliares').value
-    let sol = document.getElementById('concuctasol').value
+    let sol = document.getElementById('conductasol').value
     let foto = document.getElementById('fototipo').value
+    let img = document.getElementById('img').value
 
-    console.log(partecuerpo, sint, observ, person, fami, sol, foto)
+    console.log(partecuerpo, sint, observ, person, fami, sol, foto, img)
 }
