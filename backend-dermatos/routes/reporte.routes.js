@@ -3,6 +3,7 @@ import multer from "multer";
 import  Reporte  from '../models/reporte.js';
 import path from "path";
 import {jsPDF} from "jspdf";
+import fetch from 'node-fetch';
 
 const router = Router();
 
@@ -52,32 +53,54 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
         imgformat: imgformat[1],
     });
 
-    if (!newAnalysisRequest.imagen) {
+    if (!req.files) {
         res.json({message: "Debes ingresar una imagen"});
-    }
+    };
     
+    if (newAnalysisRequest) {
+        res.json({message: "Se ha subido correctamente"});
+    };
     
-    else{
-        res.json({ message: "Se ha subido correctamente" });
-    }
-  
-    
+    var data = new FormData()
+    data.append('imagen', req.files[0])
+
+    await fetch ("http://localhost:5000/flask", {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'multipart/form-data',
+        },
+        body: data,
+    }).catch((err) => {
+        console.log("Error: ", err);
+    });
+
+   
         
 });
 
 
 router.get('/analysisresults', async (req,res) =>{ 
 
-    const {usuarioId} = req.body;
+    // const {token} = req.headers.authorization;
 
-    const analysis = await Reporte.findOne({ 
-        where: { usuarioId },
-        order:[ [ 'createdAt', 'DESC' ]],
-    }).catch((err) => {
-        console.log("Error: ", err);
-    });
+    // const accesstoken = token.split(" ")[1];
+    // const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+
+
+    // const analysis = await Reporte.findOne({ 
+    //     where: { id: verify.id },
+    //     order:[ [ 'createdAt', 'DESC' ]],
+    // }).catch((err) => {
+    //     console.log("Error: ", err);
+    // });
    
-    console.log(analysis);
+    // const user = await Usuario.findOne({
+    //     where: { id: verify.id }
+    // }).catch((err) => {
+    //     console.log("Error: ", err);
+    // });
+
+    // console.log(analysis);
 
     const doc = new jsPDF();
     doc.setFontSize(40);
@@ -88,9 +111,6 @@ router.get('/analysisresults', async (req,res) =>{
     doc.text("Fecha: " + analysis.createdAt, 30, 80);
     doc.text("Datos Personales", 30, 95); 
     doc.setFontSize(20);
-    doc.text("Nombre: ", 30, 106); 
-    doc.text("Apellido: ", 30, 115);
-    doc.text("Email: ", 30, 125);
     doc.setFontSize(23);
     doc.text("Evaluacion", 30, 142);
     doc.setFontSize(20);
@@ -103,7 +123,9 @@ router.get('/analysisresults', async (req,res) =>{
     doc.text("Resultado: " + analysis.estado, 30, 212);
     doc.addImage(analysis.imagen, analysis.imgformat, 30, 225, 50, 50);
     
-    doc.save("Analysis-Dermatos-" + Date.now());
+    doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+    
+    
 
 });
 
