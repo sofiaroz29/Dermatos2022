@@ -1,7 +1,6 @@
 import { Router } from "express";
 import Usuario from '../models/usuarios.js';
 import jwt from "jsonwebtoken";
-import multer from "multer";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 
@@ -9,7 +8,7 @@ const router = Router();
 
 
 
-router.post('/signup', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { nombre, apellido, email, contrasenia } = req.body;
 
   const alreadyExistsUser = await Usuario.findOne({ where: { email } }).catch((err) => {
@@ -41,8 +40,7 @@ router.post('/login', async (req, res) => {
   const { email, contrasenia } = req.body;
   const userWithEmail = await Usuario.findOne({ where: { email } }).catch((err) => {
     console.log("Error: ", err);
-  }
-  );
+  });
 
   if (!userWithEmail)
     return res.json({ message: "Email y/o contraseña son incorrectas" });
@@ -58,7 +56,12 @@ router.post('/login', async (req, res) => {
       const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
       });
-      res.json({ message: "Bienvenido " + userWithEmail.nombre + "!", token: jwtToken });
+      res.json({ message: "Bienvenido " + userWithEmail.nombre + "!" });
+      res.header('authtoken', jwtToken).json({
+        error: null,
+        data: {jwtToken}
+    });
+
     }
     else {
       return res.json({ message: "Email y/o contraseña son incorrectas" });
@@ -82,9 +85,8 @@ router.post('/forgotpassword', async (req, res) => {
     return res.json({ message: "El correo electronico no existe" });
   }
 
-  const secret = process.env.JWT_SECRET + userWithEmail.contrasenia;
-  const token = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, secret, {
-    expiresIn: "1h",
+  const token = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
+    expiresIn: JWT_EXPIRES_IN,
   });
 
   const link = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
@@ -123,18 +125,19 @@ router.post('/forgotpassword', async (req, res) => {
 });
 
 // router.get('/resetpassword/:id/:token', async (req, res) => {
-//   const { id, token } = req.params;
+//   const { authtoken } = req.headers.authorization;
+//   if (!token) 
+//     return res.status(401).json({ error: 'Acceso denegado' })
+  
 
-//   const userWithEmail = await Usuario.findOne({ where: { id } }).catch((err) => {
-//     console.log("Error: ", err);
-//   });
-
-//   const secret = process.env.JWT_SECRET + userWithEmail.contrasenia;
+  
 
 //   try {
-//     const verify = jwt.verify(token, secret);
+//     const accesstoken = authtoken.split(" ")[1];
+//     const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
 
 //     res.send('verified');
+
 //   } catch (error) {
 //     res.send('not verified');
 //   }
@@ -142,39 +145,39 @@ router.post('/forgotpassword', async (req, res) => {
 // });
 
 router.post('/resetpassword/:id/:token', async (req, res) => {
-  const { id, token } = req.params;
   const { newpassword, confirmpassword } = req.body;
-
-  const userWithEmail = await Usuario.findOne({ where: { id } }).catch((err) => {
-    console.log("Error: ", err);
-  });
-
-  //const secret = process.env.JWT_SECRET + userWithEmail.contrasenia;
-
+  const {authtoken} = req.headers.authorization;
+  
+  if (!authtoken) 
+    return res.status(401).json({ error: 'Acceso denegado' })
+  
   try {
-    //const verify = jwt.verify(token, secret);
-    const encryptedPassword = await bcrypt.hash(newpassword, 10);
-    console.log(encryptedPassword);
+    const accesstoken = authtoken.split(" ")[1];
+    const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
 
-    // const updatePassword = await Usuario.update(
-    //   {
-    //     contrasenia: encryptedPassword,
-    //   },
-    //   {
-    //     where: { id: id },
-    //   }
-    // );
-
-    const updatePassword = await Usuario.findOne({ where: { id: id } });
-
-    updatePassword.set({
-      contrasenia: encryptedPassword,
-    });
-
-    await updatePassword.save();
+    if (newpassword === confirmpassword){
+      const encryptedPassword = await bcrypt.hash(newpassword, 10);
+      console.log(encryptedPassword);
 
 
-    res.send('Cambio de contraseña exitoso');
+      const updatePassword = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+      console.log("Error: ", err);
+      });
+
+      updatePassword.set({
+        contrasenia: encryptedPassword,
+      });
+
+      await updatePassword.save();
+
+
+      res.send('Cambio de contraseña exitoso');
+    }
+
+    else {
+      res.send('Los campos ingresados no son iguales');
+    }
+    
 
   } catch (err) {
     console.log(err);
