@@ -667,16 +667,6 @@ h3{
     color: white;
     text-decoration: underline;    
 }
-.recpass a,
-.registrarse a,
-
-.footer{
-    width: 100%;
-    text-align: center;
-    /* padding: 30px 0;     */
-    margin-top: 150px;
-    color: rgb(53, 51, 59);
-}
 
 /* NEW PASSWORD */
 
@@ -718,14 +708,86 @@ h3{
     margin-top: 3%;
 }
 
-.newpassword .controls{
+.prof{
+    width: 500px;
+    padding: 30px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 100px;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 7px 13px 37px #000;    
+    background: rgb(2, 4, 46);
+}
+
+.prof .botons{
+    width: 40%;
+    border: 1px solid black;
+    padding: 9px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+    background: rgba(43, 36, 85, 0.7);
+}
+
+.prof .botons:hover{
+    border: 1px solid #af9f9f;
+    background: black;
+    transition: 1s;
+}
+
+.prof h1{
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.prof p{
+    margin-top: 2%;
+}
+
+.prof .controls{
     width: 400px;
     background: rgb(41, 42, 82, 0.7);
     border: 1px solid #af9f9f;
     padding: 7px;
-    margin-left: 7%;
     border-radius: 4px;
     margin-bottom: 16px;
     font-size: 18px;
     color: white;
+}
+
+.prof input{
+    margin-left: 2%;
+}
+
+.prof #correo{
+    margin-left: 4%;
+}
+
+@media (max-width: 1000px) {
+    .prof h1{
+        text-align: left;
+    }
+
+    .prof p{
+        margin-top: 0;
+        margin-bottom: 1%;
+        text-align: left;
+    }
+
+    .prof input{
+        margin-left: 0;
+    }
+
+    .prof #correo{
+        margin-left: 0;
+    }
+}
+
+.footer{
+    width: 100%;
+    text-align: center;
+    /* padding: 30px 0;     */
+    margin-top: 150px;
+    color: rgb(53, 51, 59);
 }

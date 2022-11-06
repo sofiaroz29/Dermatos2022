@@ -33,22 +33,22 @@
     <!-- LOGIN -->
     <div class="container">
         <div class="square">
-            <div class="login" id="profile">
+            <div class="prof" id="profile">
                 <h1>PERFIL</h1>
                 <form action="#" method="post">
                     <div class="row">
-                        <p>Nombre:</p>
+                        <p>Nombre: </p>
                         <input required class="controls"  type="text"  name="nombres" id="nom" placeholder="Nombre"><br>
                     </div>
                     <div class="row">
-                        <p>Apellido:</p>
+                        <p>Apellido: </p>
                         <input required class="controls"  type="text"  name="nombres" id="apell" placeholder="Apellido"><br>
                     </div>
                     <div class="row">
-                        <p>Mail:</p>
+                        <p id="mail">Correo: </p>
                         <input required class="controls"  type="text"  name="nombres" id="correo" placeholder="mail@gmail.com"><br>
                     </div>
-                    <input class="botons" type="submit" value="Guardar Cambio">
+                    <input class="botons" type="submit" value="Guardar Cambios">
                 </form>
             </div>
         </div>
@@ -65,60 +65,7 @@
 
         function hideMemnu(){
             navLinks.syle.right = "-200px";
-        }    
-        
-        const singin = document.getElementById('singin');
-        const register = document.getElementById("register");
-        const passrecover = document.getElementById("passrecover");
-
-        const forgotPass = document.getElementById("forgotPass");
-        const login = document.getElementById("login");
-        const registrarse = document.getElementById("registrarse");        
-        const regresar = document.getElementById("regresar");
-        
-        function OnLoad() {
-            passrecover.style.display = "none";
-            singin.style.display = "block";
-            register.style.display = "none";
-            passrecover.transform = "rotate3d(0,0,0,90deg)"
-            document.title = "Log In";
-        };
-
-        window.onload = OnLoad();
-
-        forgotPass.addEventListener("click", () => {
-            passrecover.style.display = "block";
-            singin.style.display = "none";
-            register.style.display = "none";            
-            passrecover.transform = "rotate3d(0,1,0,90deg)"
-            document.title = "Password Recover";
-        });
-    
-        login.addEventListener("click", () => {
-            passrecover.style.display = "none";
-            singin.style.display = "block";
-            register.style.display = "none";
-            passrecover.transform = "rotate3d(0,0,0,90deg)"
-            document.title = "Log In";
-        });
-
-        registrarse.addEventListener("click", () => {
-            passrecover.style.display = "none";
-            singin.style.display = "none";
-            register.style.display = "block";            
-            document.title ="register page";            
-            passrecover.transform = "rotate3d(0,-1,0,90deg)"
-            document.title = "Register";
-        });
-
-        regresar.addEventListener("click", () => {
-            passrecover.style.display = "none";
-            singin.style.display = "block";
-            register.style.display = "none";
-            passrecover.transform = "rotate3d(0,0,0,90deg)"
-            document.title = "Log In";
-        });
-        
+        }            
     </script>
 
     
