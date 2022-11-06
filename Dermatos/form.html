@@ -33,7 +33,7 @@
     <!-- FORM -->
     <section class="formulario" id="nos">
         <h1>COMPLETAR DATOS</h1>
-        <div class="form">
+        <div class="form" method="post" action="www.localhost:3000/upload">
             <div class="row">
                 <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
                 <input class="controls"  type="text"  name="sintomas" id="sintomas" placeholder="Síntomas"><br>
@@ -55,8 +55,7 @@
                 <input class="controls" type="file" name="foto" id="img" value="Subir Foto" accept="image/png, image/jpg">
             </div>     
             
-            <input onclick="save()" class="botons" type="submit" value="Terminado"> 
-            <script src="form.js"></script> 
+            <input class="botons" type="submit" value="Terminado"> 
         </div>
     </section>
 
