@@ -75,6 +75,38 @@ router.post('/login', async (req, res) => {
 
 });
 
+
+router.post ('/myprofile', async (req, res) =>{
+  const {authtoken} = req.headers.authorization;
+  
+  if (!authtoken) 
+    return res.status(401).json({ error: 'Acceso denegado' })
+  
+  try {
+    const accesstoken = authtoken.split(" ")[1];
+    const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+
+    const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+    console.log("Error: ", err);
+    });
+
+    const getUserReport = await Reporte.findOne({ where: { id: verify.id } }).catch((err) => {
+      console.log("Error: ", err);
+      });
+
+    res.send(getUser);
+    
+  }
+
+  catch (err) {
+    console.log(err);
+    res.send('Algo salio mal.. :(');
+  }
+
+
+});
+
+
 router.post('/forgotpassword', async (req, res) => {
   const { email } = req.body;
   const userWithEmail = await Usuario.findOne({ where: { email } }).catch((err) => {
@@ -108,7 +140,7 @@ router.post('/forgotpassword', async (req, res) => {
     subject: "Restaurar contraseña", 
     html: `
     <h3>Entre en el link de abajo para cambiar su contraseña</h3>
-    <p>${link}/ </p>` , 
+    <a href="${link}">${link}/ </a>` , 
   }, function (error, info){
     if (error) {
       console.log(error);

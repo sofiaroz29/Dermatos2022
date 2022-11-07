@@ -58,7 +58,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     };
     
     if (newAnalysisRequest) {
-        res.json({message: "Se ha subido correctamente"});
+        console.log("se ha subido correctamente");
     };
     
     var data = new FormData()
@@ -70,9 +70,10 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
         'Content-Type': 'multipart/form-data',
         },
         body: data,
-    }).catch((err) => {
-        console.log("Error: ", err);
-    });
+    }).then(response => response.json())  
+    .then(json => res.send(json))    
+    .catch(err => console.log('Error:', err));
+    
 
    
         
