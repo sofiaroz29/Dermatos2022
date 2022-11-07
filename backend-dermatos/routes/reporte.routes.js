@@ -58,21 +58,21 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     };
     
     if (newAnalysisRequest) {
-        console.log("se ha subido correctamente");
+        res.send("se ha subido correctamente");
     };
     
-    var data = new FormData()
-    data.append('imagen', req.files[0])
+    // var data = new FormData()
+    // data.append('imagen', req.files[0])
 
-    await fetch ("http://localhost:5000/flask", {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'multipart/form-data',
-        },
-        body: data,
-    }).then(response => response.json())  
-    .then(json => res.send(json))    
-    .catch(err => console.log('Error:', err));
+    // await fetch ("http://localhost:5000/flask", {
+    //     method: 'POST',
+    //     headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //     },
+    //     body: data,
+    // }).then(response => response.json())  
+    // .then(json => res.send(json))    
+    // .catch(err => console.log('Error:', err));
     
 
    
