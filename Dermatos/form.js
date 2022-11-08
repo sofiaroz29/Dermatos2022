@@ -6,7 +6,7 @@ function save() {
     let foto = document.getElementById('fototipo').value
     let img = document.getElementById('img').files
 
-    let formData = new FormData();
+    let formData = new FormData(); // esto se hace solo porque el content type es multipart/form-data porque se sube una imagen
     formData.append("parte_del_cuerpo", parte);
     formData.append("sintomas", sint);
     formData.append("antecedentes", fami);
