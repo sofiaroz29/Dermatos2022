@@ -33,33 +33,46 @@ const upload = multer({
 
 router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
+    const {token} = req.headers.authorization;
+
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
-    console.log(req.files);
-    if (!req.files) {
-        res.send("File was not found");
-        return;
+
+    if (token){
+        const accesstoken = token.split(" ")[1];
+        const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+        const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+            console.log("Error: ", err);
+        });
+        
+        if (!req.files) {
+            res.send("File was not found");
+            return;
+        }
+    
+        const imgformat = (req.files[0].mimetype).split('/');
+        console.log(imgformat); 
+    
+        const newAnalysisRequest = await Reporte.create({
+            parte_del_cuerpo,
+            sintomas,
+            antecedentes,
+            conducta_sol,
+            fototipos,
+            imagen: req.files[0].path,
+            imgformat: imgformat[1],
+        });
+
+        if (newAnalysisRequest) {
+            res.send("se ha subido correctamente");
+        }
     }
 
-    const imgformat = (req.files[0].mimetype).split('/');
-    console.log(imgformat); 
-
-    const newAnalysisRequest = await Reporte.create({
-        parte_del_cuerpo,
-        sintomas,
-        antecedentes,
-        conducta_sol,
-        fototipos,
-        imagen: req.files[0].path,
-        imgformat: imgformat[1],
-    });
-
+    
     if (!req.files) {
         res.json({message: "Debes ingresar una imagen"});
     };
     
-    if (newAnalysisRequest) {
-        res.send("se ha subido correctamente");
-    };
+   
     
     // var data = new FormData()
     // data.append('imagen', req.files[0])
