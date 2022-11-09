@@ -76,11 +76,11 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.post ('/myprofile', async (req, res) =>{
+router.get ('/myprofile', async (req, res) =>{
   const {authtoken} = req.headers.authorization;
   
   if (!authtoken) 
-    return res.status(401).json({ error: 'Acceso denegado' })
+    return res.status(401).json({ error: 'Debes estar logueado' });
   
   try {
     const accesstoken = authtoken.split(" ")[1];
@@ -90,9 +90,9 @@ router.post ('/myprofile', async (req, res) =>{
     console.log("Error: ", err);
     });
 
-    const getUserReport = await Reporte.findOne({ where: { id: verify.id } }).catch((err) => {
-      console.log("Error: ", err);
-      });
+    // const getUserReport = await Reporte.findOne({ where: { usuarioId: verify.id } }).catch((err) => {
+    //   console.log("Error: ", err);
+    // });
 
     res.send(getUser);
     
@@ -105,6 +105,39 @@ router.post ('/myprofile', async (req, res) =>{
 
 
 });
+
+router.post('/myprofile', async (req, res) =>{
+  const {authtoken} = req.headers.authorization;
+  const {nombre, apellido, email} = req.body;
+  
+  if (!authtoken) 
+    return res.status(401).json({ error: 'Debes estar logueado' });
+  
+  try {
+    const accesstoken = authtoken.split(" ")[1];
+    const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+
+    const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+    console.log("Error: ", err);
+    });
+
+    getUser.set({
+      nombre: nombre,
+      apellido: apellido,
+      email: email,
+    });
+
+    await updatePassword.save();
+
+    res.send("Los cambios han sido generados")
+  }
+
+  catch (err) {
+    console.log(err);
+    res.send('Algo salio mal.. :(');
+  }
+
+})
 
 
 router.post('/forgotpassword', async (req, res) => {
@@ -215,6 +248,8 @@ router.post('/resetpassword/:id/:token', async (req, res) => {
     console.log(err);
     res.send('Algo salio mal.. :(');
   }
+
+
 
 
 
