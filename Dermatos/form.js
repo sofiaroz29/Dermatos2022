@@ -14,16 +14,14 @@ function save() {
     formData.append("fototipos", foto);
     formData.append("imagen", img);
 
-    fetch('http://localhost:3000/api/upload', {
+    fetch('http://localhost:3000/upload', {
         method: 'POST',
-        // headers: {
-        //   'Content-Type': 'multipart/form-data',
+        //  headers: {
+        //    'Content-Type': 'multipart/form-data',
         // },
         credentials: "include",
         body: formData,
-      });
+      })
 
     console.log(img)
-} 
-
-save();
+}
