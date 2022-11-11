@@ -33,14 +33,14 @@ def allowed_file(filename):
      return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['POST'])
+@app.route('/flask', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'file' not in request.files:
+        if 'imagen' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        file = request.files['file']
+        file = request.files['imagen']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
@@ -53,5 +53,7 @@ def upload_file():
             return predict_img(receive_resize_img(filename))
         
 if __name__ == '__main__':
-      app.run(port=5000, debug=True)
+      #app.run(port=8080, debug=True)
+    app.run(host='127.0.0.1',port=8080,debug=True)
+
     
