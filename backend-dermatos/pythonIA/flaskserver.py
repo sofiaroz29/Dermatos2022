@@ -1,7 +1,3 @@
-#import numpy as np
-#from flask import Flask, request, jsonify
-#import pickle
-
 #app = Flask(__name__)
 # Load the model
 #model = pickle.load(open('model.pkl','rb'))
@@ -23,6 +19,9 @@ from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from test.py import receive_resize_img
 from test.py import predict_img
+import numpy as np
+import pickle
+
 
 UPLOAD_FOLDER = '/pythonIA/images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
