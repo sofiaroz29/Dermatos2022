@@ -33,16 +33,16 @@ const upload = multer({
 
 router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
-    const {token} = req.headers.authorization;
+    // const {token} = req.headers.authorization;
 
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
 
-    if (token){
-        const accesstoken = token.split(" ")[1];
-        const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
-        const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
-            console.log("Error: ", err);
-        });
+    // if (token){
+        // const accesstoken = token.split(" ")[1];
+        // const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+        // const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+        //     console.log("Error: ", err);
+        // });
         
         if (!req.files) {
             res.send("File was not found");
@@ -65,7 +65,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
         if (newAnalysisRequest) {
             res.send("se ha subido correctamente");
         }
-    }
+    // }
 
     
     if (!req.files) {
