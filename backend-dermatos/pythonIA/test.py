@@ -19,24 +19,24 @@ def predict_img(img):
   resultado = loaded_model.predict(img)
   predicted_class= (resultado > 0.5).astype("int32")
   
-  print('Outputs shape')    
-  print(resultado.shape) # prints (n,1) but  need (n,)
-  resultado=np.transpose(resultado)[0]  # transformation to get (n,)
-  print(resultado.shape)  # now the shape is (n,)
-  # Applying transformation to get binary values predictions with 0.5 as thresold
+  # print('Outputs shape')    
+  # print(resultado.shape) # prints (n,1) but  need (n,)
+  # resultado=np.transpose(resultado)[0]  # transformation to get (n,)
+  # print(resultado.shape)  # now the shape is (n,)
+  # # Applying transformation to get binary values predictions with 0.5 as thresold
   resultado = list(map(lambda x: 0 if x<0.5 else 1, resultado))
 
-  print("----RESULTADO-----")
-  print(resultado)
+ #print("----RESULTADO-----")
+  #print(resultado)
 
-  print("----CLASS-----")
-  if resultado[0] == 0:
-    print ("maligno")
-  else:
-    print("benigno")  
+  #print("----CLASS-----")
+  #if resultado[0] == 0:
+   # print ("maligno")
+  #else:
+  #  print("benigno")  
   #print([np.argmax(resultado)])
 
   return resultado
 
-receive_resize_img
-predict_img(img_preprocessed)
+#receive_resize_img
+#predict_img(img_preprocessed)
