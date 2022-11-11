@@ -12,16 +12,18 @@ function save() {
     formData.append("antecedentes", fami);
     formData.append("conducta_sol", sol);
     formData.append("fototipos", foto);
-    formData.append("imagen", img);
-
-    fetch('http://localhost:3000/upload', {
+    for (let i = 0; i < img.length; i++) {
+      formData.append("imagen", img[i]);
+    }
+    fetch('http://localhost:3000/api/upload', {
         method: 'POST',
-        //  headers: {
-        //    'Content-Type': 'multipart/form-data',
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
         // },
         credentials: "include",
         body: formData,
-      })
+      });
 
     console.log(img)
-}
+} 
+

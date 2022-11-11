@@ -9,7 +9,7 @@ const router = Router();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'Images')
+        cb(null, './Images')
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
@@ -36,10 +36,11 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     // const {token} = req.headers.authorization;
 
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
+    console.log(req.files);
 
     // if (token){
-        // const accesstoken = token.split(" ")[1];
-        // const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+    //     const accesstoken = token.split(" ")[1];
+    //     const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
         // const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
         //     console.log("Error: ", err);
         // });
@@ -48,8 +49,10 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             res.send("File was not found");
             return;
         }
-    
-        const imgformat = (req.files[0].mimetype).split('/');
+        
+        
+
+        const imgformat = (req.files.type).split('/');
         console.log(imgformat); 
     
         const newAnalysisRequest = await Reporte.create({
@@ -60,6 +63,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             fototipos,
             imagen: req.files[0].path,
             imgformat: imgformat[1],
+            usuarioId: verify.id,
         });
 
         if (newAnalysisRequest) {
