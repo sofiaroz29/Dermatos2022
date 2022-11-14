@@ -22,36 +22,46 @@ from test import predict_img
 import numpy as np
 import pickle
 
-UPLOAD_FOLDER = '/pythonIA/images'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+UPLOAD_FOLDER = 'C:/Users/Admin/Documents/Dermatos/backend-dermatos/pythonIA/image'
+# ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-def allowed_file(filename):
-     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# def allowed_file(filename):
+#      return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           
 
 @app.route('/flask', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
-        # check if the post request has the file part
-        if 'imagen' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['imagen']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            filename = "img_temp."+filename.rsplit('.', 1)[1].lower()
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return predict_img(receive_resize_img(filename))
+        # # check if the post request has the file part
+        # if 'imagen' not in request.files:
+        #     flash('No file part')
+        #     return redirect(request.url)
+        # file = request.files['imagen']
+        # # If the user does not select a file, the browser submits an
+        # # empty file without a filename.
+        # if file.filename == '':
+        #     flash('No selected file')
+        #     return redirect(request.url)
+        # if file and allowed_file(file.filename):
+        #     filename = secure_filename(file.filename)
+        #     filename = "img_temp."+filename.rsplit('.', 1)[1].lower()
+        #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        f = request.files['imagen']        
+
+        filename = secure_filename(f.filename)
+        fi = os.path.join(UPLOAD_FOLDER, filename)
+        print(fi)
+        f.save(fi)
+        # f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
+        # file = open(app.config['UPLOAD_FOLDER'] + filename,"r")        
+
+        return predict_img(receive_resize_img(filename))
         
 if __name__ == '__main__':
       #app.run(port=8080, debug=True)
     app.run(host='127.0.0.1',port=8080,debug=True)
+    
 
     

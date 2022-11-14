@@ -4,6 +4,7 @@ import  Reporte  from '../models/reporte.js';
 import path from "path";
 import {jsPDF} from "jspdf";
 import fetch from 'node-fetch';
+import FormData from 'form-data';
 
 const router = Router();
 
@@ -50,9 +51,9 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             return;
         }
         
-        
+        const image = req.files[0];
 
-        const imgformat = (req.files.type).split('/');
+        const imgformat = (image.mimetype).split('/');
         console.log(imgformat); 
     
         const newAnalysisRequest = await Reporte.create({
@@ -61,9 +62,9 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             antecedentes,
             conducta_sol,
             fototipos,
-            imagen: req.files[0].path,
+            imagen: image.path,
             imgformat: imgformat[1],
-            usuarioId: verify.id,
+            //usuarioId: verify.id,
         });
 
         if (newAnalysisRequest) {
@@ -76,20 +77,21 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
         res.json({message: "Debes ingresar una imagen"});
     };
     
-   
     
-    // var data = new FormData()
-    // data.append('imagen', req.files[0])
 
-    // await fetch ("http://localhost:5000/flask", {
-    //     method: 'POST',
-    //     headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //     },
-    //     body: data,
-    // }).then(response => response.json())  
-    // .then(json => res.send(json))    
-    // .catch(err => console.log('Error:', err));
+    
+    var data = new FormData()
+    data.append('imagen', JSON.stringify(image))
+
+    await fetch ("http://localhost:8080/flask", {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'multipart/form-data',
+        },
+        body: data,
+    }).then(response => response.json())  
+    .then(json => res.send(json))    
+    .catch(err => console.log('Error:', err));
     
 
    

@@ -35,10 +35,11 @@
         <div class="square">
             <div class="login" id="singin">
                 <h1>LOG IN</h1>
-                <form action="www.localhost:3000/api/usuario" method="post">
+                <form action="http://localhost:3000/api/usuario/login" method="post">
                     <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
-                    <input required class="controls" type="password"  name="contraseña" id="contraseña" placeholder="Ingrese su contraseña"><br>
-                    <input class="botons" type="submit" value="Ingresar">
+                    <input required class="controls" type="password"  name="contraseña" id="contrasenia" placeholder="Ingrese su contraseña"><br>
+                    <input onclick="save()" class="botons" type="submit" value="Ingresar">
+                    <script src="login.js"></script>
                     
                     <div class="actions">
                         <button id="registrarse" type="button">¿Todavía no tienes una cuenta?</button>
@@ -141,6 +142,8 @@
             passrecover.transform = "rotate3d(0,0,0,90deg)"
             document.title = "Log In";
         });
+
+       
         
     </script>
 
