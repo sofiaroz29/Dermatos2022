@@ -29,44 +29,52 @@
             <i class="fa-solid fa-bars"></i>
         </nav>
     </header>
-    `
-    <!-- FORM -->
-    <section class="formulario" id="nos">
-        <h1>COMPLETAR DATOS</h1>
-        <div class="form" method="post" action="www.localhost:3000/upload">
-            <div class="row">
-                <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
-                <input class="controls"  type="text"  name="sintomas" id="sintomas" placeholder="Síntomas"><br>
-            </div>
 
-            <div class="row">
-                <input class="controls"  type="text"  name="observaciones" id="observaciones" placeholder="Observaciones"><br>
-                <input class="controls"  type="text"  name="apersonales" id="apersonales" placeholder="Antecedentes personales"><br>
-            </div>
+    
+    <div class="formulario" id="nos">
+        <div class="square">
+            <div class="form" id="formAnalisis" method="post" action="www.localhost:3000/upload">
+                <h1>COMPLETAR DATOS</h1>
+                <div class="row">
+                    <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
+                    <input class="controls"  type="text"  name="sintomas" id="sintomas" placeholder="Síntomas"><br>
+                </div>
 
-            <div class="row">
-                <input class="controls"  type="text"  name="afamiliares" id="afamiliares" placeholder="Antecedentes familiares"><br>
-                <input class="controls"  type="text"  name="fototipo" id="fototipo" placeholder="Fototipos (color y rasgos de piel)"><br>                
-                <button>?</button>
-            </div>   
-             
-            <div class="row">                
-                <input class="controls" type="text"  name="conducta respecto al sol" id="conductasol" placeholder="Conducta respecto al sol"><br>               
-                <input class="controls" type="file" name="foto" id="img" value="Subir Foto" accept="image/png, image/jpg">
-            </div>     
+                <div class="row">
+                    <input class="controls"  type="text"  name="observaciones" id="observaciones" placeholder="Observaciones"><br>
+                    <input class="controls"  type="text"  name="apersonales" id="apersonales" placeholder="Antecedentes personales"><br>
+                </div>
+
+                <div class="row">
+                    <input class="controls"  type="text"  name="afamiliares" id="afamiliares" placeholder="Antecedentes familiares"><br>
+                    <input class="controls"  type="text"  name="fototipo" id="fototipo" placeholder="Fototipos (color y rasgos de piel)"><br>                
+                    
+                    <button id="fototiposInfo" type="button">?</button>
+                </div> 
+
+                <div class="row">                
+                    <input class="controls" type="text"  name="conducta respecto al sol" id="conductasol" placeholder="Conducta respecto al sol"><br>               
+                    <input class="controls" type="file" name="foto" id="img" value="Subir Foto" accept="image/png, image/jpg">
+                </div>     
             
-            <input class="botons" type="submit" value="Terminado"> 
-        </div>
-    </section>
+                <input class="botons" type="submit" value="Terminado">                 
+            </div> 
 
-      <!-- FOOTER -->
-    <section class="footer">
-        <p>&copy; DÉRMATOS</p>
-    </section>
+            <div class="mostrarftipos" id="foto"> 
+                <h1>FOTOTIPOS</h1>              
+                <div>
+                    <img src="img/FototiposInfo.png">
+                </div>
+                <div class="actions">
+                    <button id="regresar" type="button">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- JS -->
     <script>
-
         var navLinks = document.getElementById("navLinks");
 
         function showMenu(){
@@ -75,9 +83,39 @@
 
         function hideMemnu(){
             navLinks.syle.right = "-200px";
-        }
+        }    
+        
+        const formAnalisis = document.getElementById('formAnalisis');
+        const foto = document.getElementById("foto");
+
+        const fototiposInfo = document.getElementById("fototiposInfo");        
+        const volver = document.getElementById("regresar");
+        
+        
+        function OnLoad() {
+            foto.style.display = "none";
+            formAnalisis.style.display = "block";
+            foto.transform = "rotate3d(0,1,0,90deg)"
+            document.title = "Form";
+        };
+
+        window.onload = OnLoad();
+
+        fototiposInfo.addEventListener("click", () => {
+            foto.style.display = "block";
+            formAnalisis.style.display = "none";      
+            formAnalisis.transform = "rotate3d(0,1,0,90deg)"
+            document.title = "Fototipos";
+        });
+    
+        regresar.addEventListener("click", () => {
+            foto.style.display = "none";
+            formAnalisis.style.display = "block";
+            foto.transform = "rotate3d(0,1,0,90deg)"
+            document.title = "Form";
+        });
 
     </script>
-
+    
 </body>
 </html>

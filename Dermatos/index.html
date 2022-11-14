@@ -14,7 +14,7 @@
 
 </head>
 <body>
-    <header>
+    <header id="header">
         <nav>
         <a href="index.html"><img src="img/logofinal.png"></a>
         <i class="fa-solid fa-xmark" onclick="showMenu()"></i>
@@ -149,6 +149,16 @@
             navLinks.syle.right = "-200px";
         }
 
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll",()=>{
+            if(window.scrollY > 800){
+                header.classList.add("change");
+            }
+            else{
+                header.classList.remove("change");
+            }
+        })
     </script>
 
 </body>

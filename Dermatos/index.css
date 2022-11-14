@@ -10,18 +10,21 @@ html{
 
 header{
     width: 100%;
-    height: 90px;
+    height: 70px;
     position: fixed; 
     z-index: 1000;   
     /* background-color: ; */
     background: linear-gradient(rgb(41, 42, 82, 0.7),rgb(190, 190, 226, 0.0));
-    text-align: center;
+    transition: all 1s;
+}
+
+.change{
+    background:linear-gradient(rgb(41, 42, 82),rgba(89, 90, 156, 0.9));
 }
 
 header .container{
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .hero{    
@@ -38,11 +41,11 @@ nav{
     display: flex;
     padding: 1% 6%;
     justify-content: space-between;
-    align-items: center;
 }
 
 nav img{
     width: 130px;
+    margin-top: -9%;
 }
 
 .nav-links{
@@ -54,7 +57,7 @@ nav img{
     list-style: none;
     display: inline-block;
     padding: 8px 12px;
-    padding-top: -10px;
+    margin-top: 0.5%;
     position: relative;
 }
 
@@ -244,7 +247,7 @@ h3{
     width: 100%;
     font-weight: 500;
     color: #fff;
-    font-size: 24px;
+    font-size: 23.3px;
     bottom: 0;
     left:  50%;
     transform: translateX(-50%);
@@ -303,7 +306,6 @@ h3{
 }
 
 .parte2-col p{
-    padding: 0;
     margin-top: 0.4px;
     color: rgb(0, 0, 0);
     font-size: 14px;
@@ -420,6 +422,7 @@ h3{
     background-image: linear-gradient(rgba(18, 30, 131),rgba(255, 255, 255)), url(img/degradefondo.jpg);
     background-size: cover;
 }
+
 .analisis h1{
     color: whitesmoke;
     margin-top: 70px;
@@ -469,8 +472,7 @@ h3{
     width: 1000px;
     padding: 30px;
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 15px;
+    margin-top: 5px;
     border-radius: 4px;
     box-shadow: 7px 13px 37px #000;  
     background: rgb(5, 9, 71);
@@ -548,7 +550,7 @@ h3{
     width: 40px;
     height: 40px;
     margin-top: -0.1%;
-    margin-left: -1%;
+    margin-left: -3%;
 }
 
 .formulario button:hover{
@@ -556,8 +558,20 @@ h3{
 }
 
 .formulario #fototipo{
-    margin-left: -55px;
-    margin-right: -2%;
+    margin-left: 20px;
+}
+
+.formulario .mostrarftipos{
+    color: whitesmoke;
+}
+
+.formulario .mostrarftipos h1{
+    font-weight: 500;
+    font-style: normal;
+}
+
+.formulario .mostrarftipos img{
+    background-size: 10px;
 }
 
 .formulario #img{
