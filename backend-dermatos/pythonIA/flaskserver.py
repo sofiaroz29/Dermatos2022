@@ -22,7 +22,7 @@ from test import predict_img
 import numpy as np
 import pickle
 
-UPLOAD_FOLDER = 'C:/Users/Admin/Documents/Dermatos/backend-dermatos/pythonIA/image'
+UPLOAD_FOLDER = 'C:\Proyecto2022\Dermatos\backend-dermatos\pythonIA\image'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
