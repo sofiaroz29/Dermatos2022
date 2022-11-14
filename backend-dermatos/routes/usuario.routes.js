@@ -56,11 +56,7 @@ router.post('/login', async (req, res) => {
       const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
       });
-      res.json({ message: "Bienvenido " + userWithEmail.nombre + "!" });
-      res.header('authtoken', jwtToken).json({
-        error: null,
-        data: {jwtToken}
-    });
+      res.header('authtoken', jwtToken).json({ message: "Bienvenido " + userWithEmail.nombre + "!" });
 
     }
     else {
@@ -75,6 +71,71 @@ router.post('/login', async (req, res) => {
 
 });
 
+
+router.get ('/myprofile', async (req, res) =>{
+  const {authtoken} = req.headers.authorization;
+  
+  if (!authtoken) 
+    return res.status(401).json({ error: 'Debes estar logueado' });
+  
+  try {
+    const accesstoken = authtoken.split(" ")[1];
+    const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+
+    const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+    console.log("Error: ", err);
+    });
+
+    // const getUserReport = await Reporte.findOne({ where: { usuarioId: verify.id } }).catch((err) => {
+    //   console.log("Error: ", err);
+    // });
+
+    res.send(getUser);
+    
+  }
+
+  catch (err) {
+    console.log(err);
+    res.send('Algo salio mal.. :(');
+  }
+
+
+});
+
+router.post('/myprofile', async (req, res) =>{
+  const {authtoken} = req.headers.authorization;
+  const {nombre, apellido, email} = req.body;
+  
+  if (!authtoken) 
+    return res.status(401).json({ error: 'Debes estar logueado' });
+  
+  try {
+    const accesstoken = authtoken.split(" ")[1];
+    const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+
+    const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+    console.log("Error: ", err);
+    });
+
+    getUser.set({
+      nombre: nombre,
+      apellido: apellido,
+      email: email,
+    });
+
+    await updatePassword.save();
+
+    res.send("Los cambios han sido guardados")
+  }
+
+  catch (err) {
+    console.log(err);
+    res.send('Algo salio mal.. :(');
+  }
+
+})
+
+
 router.post('/forgotpassword', async (req, res) => {
   const { email } = req.body;
   const userWithEmail = await Usuario.findOne({ where: { email } }).catch((err) => {
@@ -86,10 +147,11 @@ router.post('/forgotpassword', async (req, res) => {
   }
 
   const token = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN,
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-  const link = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
+  const linkk = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
+  const link = `http://127.0.0.1:5500/Dermatos/newPassword.html?token=${token}`;
 
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -108,7 +170,7 @@ router.post('/forgotpassword', async (req, res) => {
     subject: "Restaurar contraseña", 
     html: `
     <h3>Entre en el link de abajo para cambiar su contraseña</h3>
-    <p>${link}/ </p>` , 
+    <a href="${link}">${link}/ </a>` , 
   }, function (error, info){
     if (error) {
       console.log(error);
@@ -119,7 +181,7 @@ router.post('/forgotpassword', async (req, res) => {
 
 
 
-  console.log(link);
+  console.log(linkk);
   res.send("Ya se ha enviado el email");
 
 });
@@ -146,14 +208,12 @@ router.post('/forgotpassword', async (req, res) => {
 
 router.post('/resetpassword/:id/:token', async (req, res) => {
   const { newpassword, confirmpassword } = req.body;
-  const {authtoken} = req.headers.authorization;
-  
-  if (!authtoken) 
-    return res.status(401).json({ error: 'Acceso denegado' })
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const token = urlParams.get('token');
   
   try {
-    const accesstoken = authtoken.split(" ")[1];
-    const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+    const verify = jwt.verify(token, process.env.JWT_SECRET);
 
     if (newpassword === confirmpassword){
       const encryptedPassword = await bcrypt.hash(newpassword, 10);
@@ -183,6 +243,8 @@ router.post('/resetpassword/:id/:token', async (req, res) => {
     console.log(err);
     res.send('Algo salio mal.. :(');
   }
+
+
 
 
 

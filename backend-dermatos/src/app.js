@@ -1,11 +1,10 @@
 import express from "express";
 import morgan from "morgan";
 import multer from "multer";
-import dotenv from 'dotenv' 
+import dotenv from 'dotenv';
 dotenv.config()
 
 const app = express();
-
 
 
 app.use('/Images', express.static('./Images'))

@@ -29,8 +29,8 @@
             <i class="fa-solid fa-bars"></i>
         </nav>
     </header>
-
     
+    <!-- FORM -->   
     <div class="formulario" id="nos">
         <div class="square">
             <div class="form" id="formAnalisis" method="post" action="www.localhost:3000/upload">
@@ -39,7 +39,6 @@
                     <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
                     <input class="controls"  type="text"  name="sintomas" id="sintomas" placeholder="Síntomas"><br>
                 </div>
-
                 <div class="row">
                     <input class="controls"  type="text"  name="observaciones" id="observaciones" placeholder="Observaciones"><br>
                     <input class="controls"  type="text"  name="apersonales" id="apersonales" placeholder="Antecedentes personales"><br>
@@ -67,6 +66,8 @@
                 </div>
                 <div class="actions">
                     <button id="regresar" type="button">Volver</button>
+                    <!-- <input onclick="save()" class="botons" type="submit" value="Terminado"> 
+                    <script src="form.js"></script> -->
                 </div>
             </div>
         </div>
@@ -115,7 +116,6 @@
             document.title = "Form";
         });
 
-    </script>
-    
+    </script>    
 </body>
 </html>

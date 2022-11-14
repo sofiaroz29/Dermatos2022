@@ -4,12 +4,13 @@ import  Reporte  from '../models/reporte.js';
 import path from "path";
 import {jsPDF} from "jspdf";
 import fetch from 'node-fetch';
+import FormData from 'form-data';
 
 const router = Router();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'Images')
+        cb(null, './Images')
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
@@ -33,46 +34,65 @@ const upload = multer({
 
 router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
+    // const {token} = req.headers.authorization;
+
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
     console.log(req.files);
-    if (!req.files) {
-        res.send("File was not found");
-        return;
-    }
 
-    const imgformat = (req.files[0].mimetype).split('/');
-    console.log(imgformat); 
+    // if (token){
+    //     const accesstoken = token.split(" ")[1];
+    //     const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+        // const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+        //     console.log("Error: ", err);
+        // });
+        
+        if (!req.files) {
+            res.send("File was not found");
+            return;
+        }
+        
+        const image = req.files[0];
 
-    const newAnalysisRequest = await Reporte.create({
-        parte_del_cuerpo,
-        sintomas,
-        antecedentes,
-        conducta_sol,
-        fototipos,
-        imagen: req.files[0].path,
-        imgformat: imgformat[1],
-    });
+        const imgformat = (image.mimetype).split('/');
+        console.log(imgformat); 
+    
+        const newAnalysisRequest = await Reporte.create({
+            parte_del_cuerpo,
+            sintomas,
+            antecedentes,
+            conducta_sol,
+            fototipos,
+            imagen: image.path,
+            imgformat: imgformat[1],
+            //usuarioId: verify.id,
+        });
 
+        if (newAnalysisRequest) {
+            res.send("se ha subido correctamente");
+        }
+    // }
+
+    
     if (!req.files) {
         res.json({message: "Debes ingresar una imagen"});
     };
     
-    if (newAnalysisRequest) {
-        res.json({message: "Se ha subido correctamente"});
-    };
+    
+
     
     var data = new FormData()
-    data.append('imagen', req.files[0])
+    data.append('imagen', JSON.stringify(image))
 
-    await fetch ("http://localhost:5000/flask", {
+    await fetch ("http://localhost:8080/flask", {
         method: 'POST',
         headers: {
         'Content-Type': 'multipart/form-data',
         },
         body: data,
-    }).catch((err) => {
-        console.log("Error: ", err);
-    });
+    }).then(response => response.json())  
+    .then(json => res.send(json))    
+    .catch(err => console.log('Error:', err));
+    
 
    
         
