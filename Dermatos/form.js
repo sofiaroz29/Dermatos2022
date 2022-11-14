@@ -7,7 +7,7 @@ function save() {
     let img = document.getElementById('img').files
 
     let formData = new FormData(); // esto se hace solo porque el content type es multipart/form-data porque se sube una imagen
-    
+
     formData.append("parte_del_cuerpo", parte);
     formData.append("sintomas", sint);
     formData.append("antecedentes", fami);
@@ -23,15 +23,15 @@ function save() {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-      credentials: "include",
+      // credentials: "include",
       body: formData,
     })
-    // .then(response => response.json())  
-    // .then(json => res.send(json))    
+    // .then(response => response.json())
+    // .then(json => res.send(json))
     // .catch(err => console.log('Error:', err));
 
    // handle response
-      
+
     //   axios({
     //     url: '/analyisisresults',
     //     method: 'POST',
@@ -40,11 +40,11 @@ function save() {
     //       const url = window.URL.createObjectURL(new Blob([response.data]));
     //       const link = document.createElement('a');
     //       link.href = url;
-    //       link.setAttribute('download', 'Analysis-Dermatos.pdf'); 
+    //       link.setAttribute('download', 'Analysis-Dermatos.pdf');
     //       document.body.appendChild(link);
     //       link.click();
     // });
 
     console.log(formData)
-} 
+}
 
