@@ -1,12 +1,14 @@
 import app from "./app.js";
 import database from "../config/database.js";
+import cors from "cors"
 
 
 import '../models/usuarios.js';
 import '../models/reporte.js';
 
-
-
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 async function main() {
     try {
