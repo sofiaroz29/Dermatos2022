@@ -5,7 +5,8 @@ import path from "path";
 import {jsPDF} from "jspdf";
 import fetch from 'node-fetch';
 import FormData from 'form-data';
-
+import cloudinary from 'cloudinary';
+import fs from 'fs'
 const router = Router();
 
 const storage = multer.diskStorage({
@@ -85,17 +86,19 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     const imageUrl = cloudinary.image(req.files[0].filename)
       
 
-   //imagen = req.files[0]
+   const imagen = req.files[0]
     
-    //var data = new FormData()
-    //data.append('imagen', imagen)
+    var data = new FormData()
+    data.append('imagen', JSON.stringify(imagen))
 
-    await fetch ("http://localhost:8080/flask", {
+    console.log (data)
+
+    await fetch ("http://127.0.0.1:8080/flask", {
         method: 'POST',
-         headers: {
-         'Content-Type': 'multipart/form-data',
-         },
-         body: imageUrl,
+        //  headers: {
+        //  'Content-Type': 'multipart/form-data',
+        //  },
+         body: data,
      }).then(response => response.json())  
      .then(json => res.send(json))    
      .catch(err => console.log('Error:', err));

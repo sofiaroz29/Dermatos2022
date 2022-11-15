@@ -20,9 +20,6 @@ function save() {
 
     fetch('http://localhost:3000/api/upload', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
       // credentials: "include",
       body: formData,
     })
