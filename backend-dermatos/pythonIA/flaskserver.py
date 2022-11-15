@@ -22,7 +22,7 @@ from test import predict_img
 import numpy as np
 import pickle
 
-UPLOAD_FOLDER = 'C:\Proyecto2022\Dermatos\backend-dermatos\pythonIA\image'
+UPLOAD_FOLDER = 'C:/Proyecto2022/Dermatos/backend-dermatos/pythonIA/image'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -52,12 +52,13 @@ def upload_file():
 
         filename = secure_filename(f.filename)
         fi = os.path.join(UPLOAD_FOLDER, filename)
-        print(fi)
+
         f.save(fi)
+        print(fi)
         # f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
         # file = open(app.config['UPLOAD_FOLDER'] + filename,"r")        
 
-        return predict_img(receive_resize_img(filename))
+        return predict_img(receive_resize_img(fi))
         
 if __name__ == '__main__':
       #app.run(port=8080, debug=True)
