@@ -30,6 +30,8 @@ def predict_img(img):
   #res_list = resultado.tolist()
   #print(res_list)
   res_string = np.array_str(resultado)
+  firstDigitRes = res_string[2]
+  #print(firstDigitRes)
 
  #print("----RESULTADO-----")
   #print(resultado)
@@ -41,7 +43,8 @@ def predict_img(img):
   #  print("benigno")  
   #print([np.argmax(resultado)])
 
-  return res_string
+  #return res_string
+  return firstDigitRes
 
 #receive_resize_img
 #predict_img(img_preprocessed)
