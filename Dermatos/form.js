@@ -23,9 +23,9 @@ function save() {
       // credentials: "include",
       body: formData,
     })
-    // .then(response => response.json())
-    // .then(json => res.send(json))
-    // .catch(err => console.log('Error:', err));
+    .then(response => response.json())
+    .then(json => res.send(json))
+    .catch(err => console.log('Error:', err));
 
    // handle response
 
