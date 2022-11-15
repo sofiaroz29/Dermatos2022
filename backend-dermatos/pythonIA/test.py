@@ -5,9 +5,8 @@ from keras.applications.resnet import preprocess_input
 
 
 
-def receive_resize_img():    
-    #deberia recibir la imagen entera, este es solo un ejemplo a base de la ruta de una imagen random
-    img = image.load_img('/Users/solparrondo/Documents/dermatos/inputTest/lunarJessTest.jpeg', target_size=(224,224))
+def receive_resize_img(imgPath):    
+    img = image.load_img(imgPath, target_size=(224,224))
     img_array = image.img_to_array(img)
     img_batch = np.expand_dims(img_array, axis=0)
     img_preprocessed = preprocess_input(img_batch)

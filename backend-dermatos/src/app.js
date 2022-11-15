@@ -2,10 +2,14 @@ import express from "express";
 import morgan from "morgan";
 import multer from "multer";
 import dotenv from 'dotenv';
+import cors from 'cors';
 dotenv.config()
 
 const app = express();
 
+app.use(cors({
+    origin: '*'
+}));
 
 app.use('/Images', express.static('./Images'))
 

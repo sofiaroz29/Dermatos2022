@@ -10,7 +10,7 @@ const router = Router();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './Images')
+        cb(null, 'Images')
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
@@ -34,14 +34,13 @@ const upload = multer({
 
 router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
-    // const {token} = req.headers.authorization;
+    //const {token} = req.headers.authorization;
 
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
-    console.log(req.files);
 
-    // if (token){
-    //     const accesstoken = token.split(" ")[1];
-    //     const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+    //if (token){
+        // const accesstoken = token.split(" ")[1];
+        // const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
         // const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
         //     console.log("Error: ", err);
         // });
@@ -50,10 +49,8 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             res.send("File was not found");
             return;
         }
-        
-        const image = req.files[0];
-
-        const imgformat = (image.mimetype).split('/');
+    
+        const imgformat = (req.files[0].mimetype).split('/');
         console.log(imgformat); 
     
         const newAnalysisRequest = await Reporte.create({
@@ -62,36 +59,46 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             antecedentes,
             conducta_sol,
             fototipos,
-            imagen: image.path,
+            imagen: req.files[0].path,
             imgformat: imgformat[1],
-            //usuarioId: verify.id,
         });
 
         if (newAnalysisRequest) {
             res.send("se ha subido correctamente");
         }
-    // }
+    //}
 
     
     if (!req.files) {
         res.json({message: "Debes ingresar una imagen"});
     };
-    
-    
+
+
+    cloudinary.config({ 
+        cloud_name: process.env.CLOUD_NAME, 
+        api_key: process.env.API_KEY, 
+        api_secret: process.env.API_SECRET,
+        secure: true
+      });
 
     
-    var data = new FormData()
-    data.append('imagen', JSON.stringify(image))
+    const imageUrl = cloudinary.image(req.files[0].filename)
+      
+
+   //imagen = req.files[0]
+    
+    //var data = new FormData()
+    //data.append('imagen', imagen)
 
     await fetch ("http://localhost:8080/flask", {
         method: 'POST',
-        headers: {
-        'Content-Type': 'multipart/form-data',
-        },
-        body: data,
-    }).then(response => response.json())  
-    .then(json => res.send(json))    
-    .catch(err => console.log('Error:', err));
+         headers: {
+         'Content-Type': 'multipart/form-data',
+         },
+         body: imageUrl,
+     }).then(response => response.json())  
+     .then(json => res.send(json))    
+     .catch(err => console.log('Error:', err));
     
 
    
