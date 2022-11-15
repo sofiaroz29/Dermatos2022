@@ -2,6 +2,7 @@ import numpy as np
 import tensorflow
 from tensorflow.keras.preprocessing import image
 from keras.applications.resnet import preprocess_input
+from PIL import Image
 
 
 
