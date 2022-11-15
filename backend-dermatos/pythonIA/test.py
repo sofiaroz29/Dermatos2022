@@ -24,7 +24,12 @@ def predict_img(img):
   # resultado=np.transpose(resultado)[0]  # transformation to get (n,)
   # print(resultado.shape)  # now the shape is (n,)
   # # Applying transformation to get binary values predictions with 0.5 as thresold
-  resultado = list(map(lambda x: 0 if x<0.5 else 1, resultado))
+  print(resultado)
+  #resultado = list(map(lambda x: 0 if x<0.5 else 1, resultado))
+  #res = resultado[0]
+  #res_list = resultado.tolist()
+  #print(res_list)
+  res_string = np.array_str(resultado)
 
  #print("----RESULTADO-----")
   #print(resultado)
@@ -36,7 +41,7 @@ def predict_img(img):
   #  print("benigno")  
   #print([np.argmax(resultado)])
 
-  return resultado
+  return res_string
 
 #receive_resize_img
 #predict_img(img_preprocessed)
