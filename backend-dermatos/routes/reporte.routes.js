@@ -50,8 +50,10 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             res.send("File was not found");
             return;
         }
-    
-        const imgformat = (req.files[0].mimetype).split('/');
+        
+        const imagen = req.files[0]
+
+        const imgformat = (imagen.mimetype).split('/');
         console.log(imgformat); 
     
         const newAnalysisRequest = await Reporte.create({
@@ -60,7 +62,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             antecedentes,
             conducta_sol,
             fototipos,
-            imagen: req.files[0].path,
+            imagen: imagen.path,
             imgformat: imgformat[1],
         });
 
@@ -75,18 +77,18 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     };
 
 
-    cloudinary.config({ 
-        cloud_name: process.env.CLOUD_NAME, 
-        api_key: process.env.API_KEY, 
-        api_secret: process.env.API_SECRET,
-        secure: true
-      });
+    // cloudinary.config({ 
+    //     cloud_name: process.env.CLOUD_NAME, 
+    //     api_key: process.env.API_KEY, 
+    //     api_secret: process.env.API_SECRET,
+    //     secure: true
+    //   });
 
     
-    const imageUrl = cloudinary.image(req.files[0].filename)
+    //const imageUrl = cloudinary.image(req.files[0].filename)
       
 
-   const imagen = req.files[0]
+   
 
    var imageAsBase64 = fs.readFileSync(imagen.path, 'base64');
     

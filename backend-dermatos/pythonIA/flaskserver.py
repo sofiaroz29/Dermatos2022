@@ -21,6 +21,8 @@ from test import receive_resize_img
 from test import predict_img
 import numpy as np
 import pickle
+import base64
+
 
 UPLOAD_FOLDER = 'C:/Users/46919304/Documents/GitHub/Dermatos/backend-dermatos/pythonIA/image'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -48,12 +50,16 @@ def upload_file():
         #     filename = secure_filename(file.filename)
         #     filename = "img_temp."+filename.rsplit('.', 1)[1].lower()
         #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        f = request.data[1]        
 
-        filename = secure_filename(f.filename)
+
+        f = request.data[1] 
+        decodedImg = base64.b64decode(f)   
+        print(decodedImg)    
+
+        filename = secure_filename(decodedImg.filename)
         fi = os.path.join(UPLOAD_FOLDER, filename)
 
-        f.save(fi)
+        decodedImg.save(fi)
         print(fi)
         # f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
         # file = open(app.config['UPLOAD_FOLDER'] + filename,"r")        
