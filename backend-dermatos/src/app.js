@@ -8,7 +8,8 @@ dotenv.config()
 const app = express();
 
 app.use(cors({
-    origin: '*'
+    origin: 'http://localhost:5500',
+    credentials: true
 }));
 
 app.use('/Images', express.static('./Images'))
