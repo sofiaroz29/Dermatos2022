@@ -52,21 +52,26 @@ def upload_file():
         #     filename = "img_temp."+filename.rsplit('.', 1)[1].lower()
         #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+        imgPath = "./image/image.png"
 
-        f = request.data[1:]
-        decodedImg = base64.b64decode(f)  
-        print(decodedImg) 
-           
+        with open(imgPath, "wb") as f:
+          f.write(base64.b64decode(request.json["image"]))
 
-        filename = secure_filename(decodedImg.filename)
-        fi = os.path.join(UPLOAD_FOLDER, filename)
+        
+        #importing base64 module
 
-        decodedImg.save(fi)
-        print(fi)
+        # img_file = open('image.jpeg', 'wb')
+        # img_file.write(decodedImg)
+        # img_file.close()
+
+        # filename = secure_filename(img_file.filename)
+        # fi = os.path.join(UPLOAD_FOLDER, filename)
+        # img_file.save(fi)
+        # print(fi)
         # f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
         # file = open(app.config['UPLOAD_FOLDER'] + filename,"r")        
 
-        return predict_img(receive_resize_img(fi))
+        return predict_img(receive_resize_img(imgPath))
         
 if __name__ == '__main__':
       #app.run(port=8080, debug=True)

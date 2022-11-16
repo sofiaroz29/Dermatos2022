@@ -91,22 +91,16 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
    
 
    var imageAsBase64 = fs.readFileSync(imagen.path, 'base64');
-    
-    var data = new FormData()
-    data.append(1, JSON.stringify(imageAsBase64))
-
-    console.log (data)
 
     await fetch ("http://127.0.0.1:8080/flask", {
         method: 'POST',
          headers: {
          'Content-Type': 'application/json',
          },
-         body: {
-             1: JSON.stringify(imageAsBase64)
-         },
-     }).then(response => response.json())  
-     .then(json => res.send(json))    
+         body: JSON.stringify({"image": imageAsBase64})
+     }).then(response => response.json())
+     .then(json => console.log(json))
+     .then(send => res.json(send))    
      .catch(err => console.log('Error:', err));
     
 
