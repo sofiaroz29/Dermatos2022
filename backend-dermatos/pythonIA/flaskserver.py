@@ -48,7 +48,7 @@ def upload_file():
         #     filename = secure_filename(file.filename)
         #     filename = "img_temp."+filename.rsplit('.', 1)[1].lower()
         #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        f = request.files['imagen']        
+        f = request.data["imagen"]        
 
         filename = secure_filename(f.filename)
         fi = os.path.join(UPLOAD_FOLDER, filename)
