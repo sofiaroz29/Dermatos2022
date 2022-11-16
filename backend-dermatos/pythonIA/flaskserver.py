@@ -22,6 +22,7 @@ from test import predict_img
 import numpy as np
 import pickle
 import base64
+from base64 import b64decode
 
 
 UPLOAD_FOLDER = 'C:/Users/46919304/Documents/GitHub/Dermatos/backend-dermatos/pythonIA/image'
@@ -52,9 +53,10 @@ def upload_file():
         #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
-        f = request.data[1] 
-        decodedImg = base64.b64decode(f)   
-        print(decodedImg)    
+        f = request.data[1:]
+        decodedImg = base64.b64decode(f)  
+        print(decodedImg) 
+           
 
         filename = secure_filename(decodedImg.filename)
         fi = os.path.join(UPLOAD_FOLDER, filename)
