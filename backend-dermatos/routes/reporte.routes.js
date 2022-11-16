@@ -97,7 +97,10 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
          headers: {
          'Content-Type': 'application/json',
          },
-         body: JSON.stringify({"image": imageAsBase64})
+         body: JSON.stringify({
+             "image": imageAsBase64,
+             "filename": imagen.filename,
+        })
      }).then(response => response.json())
      .then(json => console.log(json))
      .then(send => res.json(send))    

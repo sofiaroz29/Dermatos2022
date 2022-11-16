@@ -25,7 +25,7 @@ import base64
 from base64 import b64decode
 
 
-UPLOAD_FOLDER = 'C:/Users/46919304/Documents/GitHub/Dermatos/backend-dermatos/pythonIA/image'
+#UPLOAD_FOLDER = 'C:/Users/46919304/Documents/GitHub/Dermatos/backend-dermatos/pythonIA/image'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -52,7 +52,7 @@ def upload_file():
         #     filename = "img_temp."+filename.rsplit('.', 1)[1].lower()
         #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        imgPath = "./image/image.png"
+        imgPath = "./image/" + request.json["filename"]
 
         with open(imgPath, "wb") as f:
           f.write(base64.b64decode(request.json["image"]))
