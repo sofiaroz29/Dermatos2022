@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dérmatos</title>
+    
+    <link rel="stylesheet" href="./index.css" onclick="hideMenu()">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">   
+    <script src="https://kit.fontawesome.com/c408ff2c28.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section class="sub-header">
+        <nav>            
+        <a href="index.html"><img src="img/logofinal.png"></a>
+        <i class="fa-solid fa-xmark" onclick="showMenu()"></i>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">INICIO</a></li>
+                    <li><a href="analisis.html">REALIZAR ANALISIS</a></li>
+                    <li><a href="login.html">INICIAR SESIÓN</a></li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars"></i>
+        </nav>
+        <!-- <h1>DETECCIÓN</h1> -->
+    </header>
+
+    <section class="descarga">
+        <div class="row">
+            <div class="descarga-col">
+                <h1>SE ESTÁN PROCESANDO LOS DATOS</h1>
+                <p>Para descargar el análisis haga click a continuación...<p>
+                <a class="hero-btn red-btn">DESCARGAR</a>
+            </div>
+            <!-- <div class="analisis-col">
+                <img src="img/revision.jpg">
+            </div> -->
+        </div>
+    </section>
+
+    <!-- JS -->
+    <script>
+
+        var navLinks = document.getElementById("navLinks");
+
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+
+        function hideMemnu(){
+            navLinks.syle.right = "-200px";
+        }
+
+    </script>
+
+</body>
+</html>
