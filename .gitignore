@@ -4,3 +4,5 @@ dermatosVirtualEnv/
 virtualEnvDermatos/
 dermatos-venv/
 venvDermatos/
+model.h5
+__pycache__/

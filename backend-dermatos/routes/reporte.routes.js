@@ -5,7 +5,8 @@ import path from "path";
 import {jsPDF} from "jspdf";
 import fetch from 'node-fetch';
 import FormData from 'form-data';
-
+import cloudinary from 'cloudinary';
+import fs from 'fs'
 const router = Router();
 
 const storage = multer.diskStorage({
@@ -49,8 +50,10 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             res.send("File was not found");
             return;
         }
-    
-        const imgformat = (req.files[0].mimetype).split('/');
+        
+        const imagen = req.files[0]
+
+        const imgformat = (imagen.mimetype).split('/');
         console.log(imgformat); 
     
         const newAnalysisRequest = await Reporte.create({
@@ -59,7 +62,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             antecedentes,
             conducta_sol,
             fototipos,
-            imagen: req.files[0].path,
+            imagen: imagen.path,
             imgformat: imgformat[1],
         });
 
@@ -74,30 +77,33 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     };
 
 
-    cloudinary.config({ 
-        cloud_name: process.env.CLOUD_NAME, 
-        api_key: process.env.API_KEY, 
-        api_secret: process.env.API_SECRET,
-        secure: true
-      });
+    // cloudinary.config({ 
+    //     cloud_name: process.env.CLOUD_NAME, 
+    //     api_key: process.env.API_KEY, 
+    //     api_secret: process.env.API_SECRET,
+    //     secure: true
+    //   });
 
     
-    const imageUrl = cloudinary.image(req.files[0].filename)
+    //const imageUrl = cloudinary.image(req.files[0].filename)
       
 
-   //imagen = req.files[0]
-    
-    //var data = new FormData()
-    //data.append('imagen', imagen)
+   
 
-    await fetch ("http://localhost:8080/flask", {
+   var imageAsBase64 = fs.readFileSync(imagen.path, 'base64');
+
+    await fetch ("http://127.0.0.1:8080/flask", {
         method: 'POST',
          headers: {
-         'Content-Type': 'multipart/form-data',
+         'Content-Type': 'application/json',
          },
-         body: imageUrl,
-     }).then(response => response.json())  
-     .then(json => res.send(json))    
+         body: JSON.stringify({
+             "image": imageAsBase64,
+             "filename": imagen.filename,
+        })
+     }).then(response => response.json())
+     .then(json => console.log(json))
+     .then(send => res.json(send))    
      .catch(err => console.log('Error:', err));
     
 

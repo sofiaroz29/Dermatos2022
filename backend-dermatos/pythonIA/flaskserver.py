@@ -21,8 +21,11 @@ from test import receive_resize_img
 from test import predict_img
 import numpy as np
 import pickle
+import base64
+from base64 import b64decode
 
-UPLOAD_FOLDER = 'C:\Proyecto2022\Dermatos\backend-dermatos\pythonIA\image'
+
+#UPLOAD_FOLDER = 'C:/Users/46919304/Documents/GitHub/Dermatos/backend-dermatos/pythonIA/image'
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -48,16 +51,27 @@ def upload_file():
         #     filename = secure_filename(file.filename)
         #     filename = "img_temp."+filename.rsplit('.', 1)[1].lower()
         #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        f = request.files['imagen']        
 
-        filename = secure_filename(f.filename)
-        fi = os.path.join(UPLOAD_FOLDER, filename)
-        print(fi)
-        f.save(fi)
+        imgPath = "./image/" + request.json["filename"]
+
+        with open(imgPath, "wb") as f:
+          f.write(base64.b64decode(request.json["image"]))
+
+        
+        #importing base64 module
+
+        # img_file = open('image.jpeg', 'wb')
+        # img_file.write(decodedImg)
+        # img_file.close()
+
+        # filename = secure_filename(img_file.filename)
+        # fi = os.path.join(UPLOAD_FOLDER, filename)
+        # img_file.save(fi)
+        # print(fi)
         # f.save(app.config['UPLOAD_FOLDER'] + "/" + filename)
         # file = open(app.config['UPLOAD_FOLDER'] + filename,"r")        
 
-        return predict_img(receive_resize_img(filename))
+        return predict_img(receive_resize_img(imgPath))
         
 if __name__ == '__main__':
       #app.run(port=8080, debug=True)

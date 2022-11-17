@@ -7,6 +7,7 @@ function save() {
     let img = document.getElementById('img').files
 
     let formData = new FormData(); // esto se hace solo porque el content type es multipart/form-data porque se sube una imagen
+    const fileField = document.querySelector('input[type="file"]');
 
     formData.append("parte_del_cuerpo", parte);
     formData.append("sintomas", sint);
@@ -18,16 +19,20 @@ function save() {
       formData.append("imagen", img[i]);
     }
 
+    // formData.append("imagen", fileField.files[0]);
+
+
+    // const response = await 
     fetch('http://localhost:3000/api/upload', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      // credentials: "include",
+      credentials: "include",
       body: formData,
+      ContentType: 'application/json'
     })
-    // .then(response => response.json())
-    // .then(json => res.send(json))
+
+    // return response.pdf();
+    // .then(response => response.pdf())
+    // .then(pdf => res.send(pdf))
     // .catch(err => console.log('Error:', err));
 
    // handle response

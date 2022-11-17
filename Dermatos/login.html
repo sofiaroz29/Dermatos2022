@@ -35,10 +35,10 @@
         <div class="square">
             <div class="login" id="singin">
                 <h1>LOG IN</h1>
-                <form action="http://localhost:3000/api/usuario/login" method="post">
-                    <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
-                    <input required class="controls" type="password"  name="contraseña" id="contrasenia" placeholder="Ingrese su contraseña"><br>
-                    <input onclick="save()" class="botons" type="submit" value="Ingresar">
+                <form action="#" method="post">
+                    <input required class="controls"  type="email"  name="correo" id="logincorreo" placeholder="Ingrese su Email"><br>
+                    <input required class="controls" type="password"  name="contraseña" id="logincontrasenia" placeholder="Ingrese su contraseña"><br>
+                    <input onclick="login()" class="botons" type="submit" value="Ingresar">
                     <script src="login.js"></script>
                     
                     <div class="actions">
@@ -54,8 +54,9 @@
                     <input required class="controls"  type="text"  name="nombres" id="nombres" placeholder="Ingrese su Nombre"><br>
                     <input required class="controls"  type="text"  name="apellidos" id="apellidos" placeholder="Ingrese su Apellido"><br>
                     <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
-                    <input required class="controls" type="password"  name="contraseña" id="contraseña" placeholder="Ingrese su contraseña"><br>
-                    <input class="botons" type="submit" value="Registrarse">
+                    <input required class="controls" type="password"  name="contrasenia" id="contrasenia" placeholder="Ingrese su contraseña"><br>
+                    <input onclick= "register()" class="botons" type="submit" value="Registrarse">
+                    <script src="register.js"></script>
 
                     <div class="actions">
                         <button id="login" type="button">¿Ya tienes una cuenta?</button>
@@ -67,7 +68,7 @@
                 <h1>RECUPERAR CONTRASEÑA</h1>
                 <form action="#" method="post">
                     <p>Se le envara un correo para restablecer la contraseña. Una vez pueda hacerlo, regrese.</p>
-                    <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
+                    <input required class="controls"  type="email"  name="correo" id="resetcorreo" placeholder="Ingrese su Email"><br>
                     <input class="botons" type="submit" value="Enviar">
 
                     <div class="actions">
