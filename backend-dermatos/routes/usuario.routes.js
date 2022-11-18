@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
       const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
       });
-      res.header('authtoken', jwtToken).json({ message: "Bienvenido " + userWithEmail.nombre + "!" });
+      res.json({ message: "Bienvenido " + userWithEmail.nombre + "!" }, {token: jwtToken});
 
     }
     else {
