@@ -1,4 +1,4 @@
-node_modules/
+backend-dermatos/node_modules/
 .env
 dermatosVirtualEnv/
 virtualEnvDermatos/
