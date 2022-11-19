@@ -38,6 +38,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { email, contrasenia } = req.body;
+  console.log(req.body)
   const userWithEmail = await Usuario.findOne({ where: { email } }).catch((err) => {
     console.log("Error: ", err);
   });
@@ -151,7 +152,7 @@ router.post('/forgotpassword', async (req, res) => {
   });
 
   const linkk = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
-  const link = `http://127.0.0.1:5500/Dermatos/newPassword.html?token=${token}`;
+  const link = `http://localhost:5500/Dermatos/newPassword.html?token=${token}`;
 
   let transporter = nodemailer.createTransport({
     service: "gmail",

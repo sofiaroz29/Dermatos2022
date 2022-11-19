@@ -24,10 +24,7 @@
     "mysql2": "^2.3.3",
     "node-fetch": "^3.2.10",
     "nodemailer": "^6.8.0",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.0",
-    "sequelize": "^6.21.6",
-    "sequelize-auto-migrations-v2": "^1.2.1"
+    "sequelize": "^6.21.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
