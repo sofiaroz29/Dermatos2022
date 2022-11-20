@@ -151,7 +151,7 @@ router.post('/forgotpassword', async (req, res) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-  const linkk = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
+  const linkk = `http://localhost:3000/api/usuario/resetpassword/${token}`;
   const link = `http://localhost:5500/Dermatos/newPassword.html?token=${token}`;
 
   let transporter = nodemailer.createTransport({
@@ -207,11 +207,14 @@ router.post('/forgotpassword', async (req, res) => {
 
 // });
 
-router.post('/resetpassword/:id/:token', async (req, res) => {
+router.post('/resetpassword/:token', async (req, res) => {
   const { newpassword, confirmpassword } = req.body;
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const token = urlParams.get('token');
+  // const queryString = window.location.search;
+  // const urlParams = new URLSearchParams(queryString);
+  // const token = urlParams.get('token');
+  const {token} = req.params;
+  console.log(typeof token)
+
   
   try {
     const verify = jwt.verify(token, process.env.JWT_SECRET);
