@@ -23,7 +23,6 @@
                 <ul>
                     <li><a href="index.html">INICIO</a></li>
                     <li><a href="analisis.html">REALIZAR ANALISIS</a></li>
-                    <li><a href="login.html">INICIAR SESIÓN</a></li>
                 </ul>
             </div>
             <i class="fa-solid fa-bars"></i>
@@ -36,27 +35,27 @@
             <div class="form" id="formAnalisis" method="post" action="www.localhost:3000/upload">
                 <h1>COMPLETAR DATOS</h1>
                 <div class="row">
-                    <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
-                    <input class="controls"  type="text"  name="sintomas" id="sintomas" placeholder="Síntomas"><br>
+                    <input required class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
+                    <input required class="controls"  type="text"  name="sintomas" id="sintomas" placeholder="Síntomas"><br>
                 </div>
                 <div class="row">
-                    <input class="controls"  type="text"  name="observaciones" id="observaciones" placeholder="Observaciones"><br>
-                    <input class="controls"  type="text"  name="apersonales" id="apersonales" placeholder="Antecedentes personales"><br>
+                    <input required class="controls"  type="text"  name="observaciones" id="observaciones" placeholder="Observaciones"><br>
+                    <input required class="controls"  type="text"  name="apersonales" id="apersonales" placeholder="Antecedentes personales"><br>
                 </div>
 
                 <div class="row">
-                    <input class="controls"  type="text"  name="afamiliares" id="afamiliares" placeholder="Antecedentes familiares"><br>
-                    <input class="controls"  type="text"  name="fototipo" id="fototipo" placeholder="Fototipos (color y rasgos de piel)"><br>                
+                    <input required class="controls"  type="text"  name="afamiliares" id="afamiliares" placeholder="Antecedentes familiares"><br>
+                    <input required class="controls"  type="text"  name="fototipo" id="fototipo" placeholder="Fototipos (color y rasgos de piel)"><br>                
                     
                     <button id="fototiposInfo" type="button">?</button>
                 </div> 
 
                 <div class="row">                
-                    <input class="controls" type="text"  name="conducta respecto al sol" id="conductasol" placeholder="Conducta respecto al sol"><br>               
-                    <input class="controls" type="file" name="foto" id="img" value="Subir Foto" accept="image/png, image/jpg">
+                    <input required class="controls" type="text"  name="conducta respecto al sol" id="conductasol" placeholder="Conducta respecto al sol"><br>               
+                    <input required class="controls" type="file" name="foto" id="img" value="Subir Foto" accept="image/png, image/jpg">
                 </div>     
             
-                <input class="botons" type="submit" value="Terminado" onclick="save()">   
+                <input required class="botons" type="submit" value="Terminado" onclick="save()">   
                 <script src="form.js"></script>            
             </div> 
 

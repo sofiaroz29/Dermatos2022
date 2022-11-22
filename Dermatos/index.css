@@ -407,7 +407,7 @@ h3{
 .sub-header{
     height: 100px;
     width: 100%;
-    background-image: linear-gradient(rgba(4,5,30,0.9),rgba(18, 30, 131)), url(img/fondob.jpg);
+    background-image: linear-gradient(rgba(4,5,30,0.9),rgba(12, 21, 102)), url(img/fondob.jpg);
     background-position: center;
     background-size: cover;
     text-align: center;
@@ -418,13 +418,13 @@ h3{
     width: 100%;
     margin: auto;
     margin-top: -50px;
-    background-image: linear-gradient(rgba(18, 30, 131),rgba(255, 255, 255)), url(img/degradefondo.jpg);
+    background-image: linear-gradient(rgb(9, 18, 99),rgb(255, 255, 255)), url(img/degradefondo.jpg);
     background-size: cover;
 }
 
 .analisis h1{
     color: whitesmoke;
-    margin-top: 70px;
+    margin-top: 90px;
     text-shadow: 5px 4px #1b171775;
 }
 
@@ -597,7 +597,7 @@ h3{
     width: 100%;
     margin: auto;
     margin-top: -50px;
-    background-image: linear-gradient(rgba(18, 30, 131),rgba(255, 255, 255)), url(img/degradefondo.jpg);
+    background-image: linear-gradient(rgb(9, 18, 99),rgb(255, 255, 255)), url(img/degradefondo.jpg);
     background-size: cover;
 }
 
