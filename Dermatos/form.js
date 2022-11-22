@@ -1,4 +1,4 @@
-function save() {
+async function save() {
     let parte = document.getElementById('parte').value
     let sint = document.getElementById('sintomas').value
     let fami = document.getElementById('afamiliares').value
@@ -9,47 +9,33 @@ function save() {
     let formData = new FormData(); // esto se hace solo porque el content type es multipart/form-data porque se sube una imagen
     const fileField = document.querySelector('input[type="file"]');
 
-    formData.append("parte_del_cuerpo", parte);
-    formData.append("sintomas", sint);
-    formData.append("antecedentes", fami);
-    formData.append("conducta_sol", sol);
     formData.append("fototipos", foto);
 
     for (let i = 0; i < img.length; i++) {
       formData.append("imagen", img[i]);
     }
 
+    // Simulate a mouse click:
+    window.location.href = "descarga.html";
+
+    function download(){
+      var doc = new jsPDF();
+      doc.text("prueba 123", 10, 10);
+      doc.save("a4.pdf");
+    }
+
     // formData.append("imagen", fileField.files[0]);
 
 
     // const response = await 
-    fetch('http://localhost:3000/api/upload', {
+    const respone = await fetch('http://localhost:3000/api/upload', {
       method: 'POST',
       credentials: "include",
       body: formData,
       ContentType: 'application/json'
     })
 
-    // return response.pdf();
-    // .then(response => response.pdf())
-    // .then(pdf => res.send(pdf))
-    // .catch(err => console.log('Error:', err));
-
    // handle response
-
-    //   axios({
-    //     url: '/analyisisresults',
-    //     method: 'POST',
-    //     responseType: 'blob',
-    // }).then((response) => {
-    //       const url = window.URL.createObjectURL(new Blob([response.data]));
-    //       const link = document.createElement('a');
-    //       link.href = url;
-    //       link.setAttribute('download', 'Analysis-Dermatos.pdf');
-    //       document.body.appendChild(link);
-    //       link.click();
-    // });
-
     console.log(formData)
 }
 
