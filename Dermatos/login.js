@@ -8,6 +8,8 @@ function loginSave() {
     }
     console.log(data)
 
+    var jsonResponse = {};
+
     fetch('http://localhost:3000/api/usuario/login', {
         method: 'POST',
         headers: {
@@ -15,13 +17,12 @@ function loginSave() {
         },
         //credentials: "include",
         body: JSON.stringify(data)
-      }).catch(err => console.log('Error:', err));
-      // .then(response => response.json())
-      // .then(json => res.send(json))
-      // .catch(err => console.log('Error:', err))
-      console.log(response.json());
-      console.log(data);
-      return response.json();
+      }).then(response => response.json())
+      .then(json => jsonResponse = json)  
+      .catch(err => console.log('Error:', err));
+
+      window.localStorage.setItem('authtoken', jsonResponse.token);
+     
    
 } 
 
