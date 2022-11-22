@@ -67,7 +67,7 @@
                 <form action="#" method="post">
                     <p>Se le envara un correo para restablecer la contraseña. Una vez pueda hacerlo, regrese.</p>
                     <input required class="controls"  type="email"  name="correo" id="resetcorreo" placeholder="Ingrese su Email"><br>
-                    <input class="botons" type="submit" value="Enviar">
+                    <input onclick= "getUser()" class="botons" type="submit" value="Enviar">
 
                     <div class="actions">
                         <button id="regresar" type="button">Regresar</button>
@@ -145,3 +145,4 @@
 </html>
 <script src="./register.js"></script>
 <script src="./login.js"></script>
+<script src="./newPassword.js"></script>

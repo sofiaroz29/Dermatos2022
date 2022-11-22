@@ -208,7 +208,7 @@ router.post('/forgotpassword', async (req, res) => {
 // });
 
 router.post('/resetpassword/:token', async (req, res) => {
-  const { newpassword, confirmpassword } = req.body;
+  const { email, newpassword, confirmpassword } = req.body;
   // const queryString = window.location.search;
   // const urlParams = new URLSearchParams(queryString);
   // const token = urlParams.get('token');
