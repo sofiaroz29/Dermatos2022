@@ -30,7 +30,7 @@ const Reporte = database.define("reportes", {
   },
 
   estado: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
 
   imagen: {
