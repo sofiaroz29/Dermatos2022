@@ -7,6 +7,9 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import cloudinary from 'cloudinary';
 import fs from 'fs'
+import jwt from "jsonwebtoken"
+import Usuario from '../models/usuarios.js';
+
 const router = Router();
 
 const storage = multer.diskStorage({
@@ -35,23 +38,45 @@ const upload = multer({
 
 router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
-    //const {token} = req.headers.authorization;
+    const token = req.headers.authorization;
 
     const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
+    const imagen = req.files[0]
 
-    //if (token){
-        // const accesstoken = token.split(" ")[1];
-        // const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
-        // const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
-        //     console.log("Error: ", err);
-        // });
+    console.log(token);
+
+    var jsonResponse = {}
+    var imageAsBase64 = fs.readFileSync(imagen.path, 'base64');
+
+    await fetch ("http://127.0.0.1:8080/flask", {
+        method: 'POST',
+         headers: {
+         'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({
+             "image": imageAsBase64,
+             "filename": imagen.filename,
+        })
+        }).then(response => response.json())
+       .then(json => jsonResponse = json)  
+       .then(result => console.log(result))
+       .catch(err => console.log('Error:', err));
+    
+
+    if (!!token){
+        const accesstoken = token.split(" ")[1];
+        console.log(accesstoken);
+        const verify = jwt.verify(accesstoken, process.env.JWT_SECRET);
+        const getUser = await Usuario.findOne({ where: { id: verify.id } }).catch((err) => {
+            console.log("Error: ", err);
+        });
         
         if (!req.files) {
             res.send("File was not found");
             return;
         }
         
-        const imagen = req.files[0]
+        
 
         const imgformat = (imagen.mimetype).split('/');
         console.log(imgformat); 
@@ -64,17 +89,21 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             fototipos,
             imagen: imagen.path,
             imgformat: imgformat[1],
+            usuarioId: getUser.id,
+            estado: jsonResponse,
         });
 
         if (newAnalysisRequest) {
-            res.send("se ha subido correctamente");
+            console.log("se ha subido correctamente");
         }
-    //}
+    }
 
     
     if (!req.files) {
         res.json({message: "Debes ingresar una imagen"});
     };
+
+    res.json(jsonResponse);
 
 
     // cloudinary.config({ 
@@ -87,28 +116,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     
     //const imageUrl = cloudinary.image(req.files[0].filename)
       
-
-   
-
-   var imageAsBase64 = fs.readFileSync(imagen.path, 'base64');
-
-    await fetch ("http://127.0.0.1:8080/flask", {
-        method: 'POST',
-         headers: {
-         'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({
-             "image": imageAsBase64,
-             "filename": imagen.filename,
-        })
-     }).then(response => response.json())
-     .then(json => console.log(json))
-     .then(send => res.json(send))    
-     .catch(err => console.log('Error:', err));
-    
-
-   
-        
+ 
 });
 
 

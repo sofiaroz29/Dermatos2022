@@ -38,6 +38,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { email, contrasenia } = req.body;
+  console.log(req.body)
   const userWithEmail = await Usuario.findOne({ where: { email } }).catch((err) => {
     console.log("Error: ", err);
   });
@@ -56,7 +57,7 @@ router.post('/login', async (req, res) => {
       const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
       });
-      res.header('authtoken', jwtToken).json({ message: "Bienvenido " + userWithEmail.nombre + "!" });
+      res.json({ message: "Bienvenido " + userWithEmail.nombre + "!" , token: jwtToken}, );
 
     }
     else {
@@ -150,8 +151,8 @@ router.post('/forgotpassword', async (req, res) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-  const linkk = `http://localhost:3000/api/usuario/resetpassword/${userWithEmail.id}/${token}`;
-  const link = `http://127.0.0.1:5500/Dermatos/newPassword.html?token=${token}`;
+  const linkk = `http://localhost:3000/api/usuario/resetpassword/${token}`;
+  const link = `http://localhost:5500/Dermatos/newPassword.html?token=${token}`;
 
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -206,11 +207,14 @@ router.post('/forgotpassword', async (req, res) => {
 
 // });
 
-router.post('/resetpassword/:id/:token', async (req, res) => {
-  const { newpassword, confirmpassword } = req.body;
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const token = urlParams.get('token');
+router.post('/resetpassword/:token', async (req, res) => {
+  const { email, newpassword, confirmpassword } = req.body;
+  // const queryString = window.location.search;
+  // const urlParams = new URLSearchParams(queryString);
+  // const token = urlParams.get('token');
+  const {token} = req.params;
+  console.log(typeof token)
+
   
   try {
     const verify = jwt.verify(token, process.env.JWT_SECRET);

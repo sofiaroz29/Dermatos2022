@@ -1,4 +1,4 @@
-function register() {
+function registerSave() {
     let nombre = document.getElementById('nombres').value
     let apellido = document.getElementById('apellidos').value
     let email = document.getElementById('correo').value

@@ -38,8 +38,7 @@
                 <form action="#" method="post">
                     <input required class="controls"  type="email"  name="correo" id="logincorreo" placeholder="Ingrese su Email"><br>
                     <input required class="controls" type="password"  name="contraseña" id="logincontrasenia" placeholder="Ingrese su contraseña"><br>
-                    <input onclick="login()" class="botons" type="submit" value="Ingresar">
-                    <script src="login.js"></script>
+                    <input onclick="loginSave()" class="botons" type="submit" value="Ingresar">
                     
                     <div class="actions">
                         <button id="registrarse" type="button">¿Todavía no tienes una cuenta?</button>
@@ -55,9 +54,8 @@
                     <input required class="controls"  type="text"  name="apellidos" id="apellidos" placeholder="Ingrese su Apellido"><br>
                     <input required class="controls"  type="email"  name="correo" id="correo" placeholder="Ingrese su Email"><br>
                     <input required class="controls" type="password"  name="contrasenia" id="contrasenia" placeholder="Ingrese su contraseña"><br>
-                    <input onclick= "register()" class="botons" type="submit" value="Registrarse">
-                    <script src="register.js"></script>
-
+                    <input onclick= "registerSave()" class="botons" type="submit" value="Registrarse">
+                    
                     <div class="actions">
                         <button id="login" type="button">¿Ya tienes una cuenta?</button>
                     </div>
@@ -69,7 +67,7 @@
                 <form action="#" method="post">
                     <p>Se le envara un correo para restablecer la contraseña. Una vez pueda hacerlo, regrese.</p>
                     <input required class="controls"  type="email"  name="correo" id="resetcorreo" placeholder="Ingrese su Email"><br>
-                    <input class="botons" type="submit" value="Enviar">
+                    <input onclick= "getUser()" class="botons" type="submit" value="Enviar">
 
                     <div class="actions">
                         <button id="regresar" type="button">Regresar</button>
@@ -145,3 +143,6 @@
     </script>
 </body>
 </html>
+<script src="./register.js"></script>
+<script src="./login.js"></script>
+<script src="./newPassword.js"></script>
