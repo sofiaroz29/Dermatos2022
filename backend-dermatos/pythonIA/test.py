@@ -44,7 +44,13 @@ def predict_img(img):
   #print([np.argmax(resultado)])
 
   #return res_string
-  return firstDigitRes
+
+  if firstDigitRes == 0:
+    return "maligno"
+  else:
+    return "benigno"
+
+  #return firstDigitRes
 
 #receive_resize_img
 #predict_img(img_preprocessed)
