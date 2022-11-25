@@ -40,27 +40,32 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
 
     const token = req.headers.authorization;
 
-    const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
+    // const {parte_del_cuerpo, sintomas, antecedentes, conducta_sol, fototipos} = req.body;
     const imagen = req.files[0]
 
     console.log(token);
 
-    var jsonResponse = {}
+    var response = ""
     var imageAsBase64 = fs.readFileSync(imagen.path, 'base64');
 
-    await fetch ("http://127.0.0.1:8080/flask", {
+    fetch ("http://127.0.0.1:8080/flask", {
         method: 'POST',
-         headers: {
+        headers: {
          'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({
-             "image": imageAsBase64,
-             "filename": imagen.filename,
+        },
+        body: JSON.stringify({
+            "image": imageAsBase64,
+            "filename": imagen.filename,
         })
-        }).then(response => response.json())
-       .then(json => jsonResponse = json)  
-       .then(result => console.log(result))
-       .catch(err => console.log('Error:', err));
+        }).then((response) => response.text())
+        .then((data) => console.log(data))
+        .then((result) => console.log(result))
+        .catch(err => console.log('Error:', err));
+        
+    //     .then(response => response.json())
+    //    .then(json => jsonResponse = json)  
+    //    .then(result => console.log(result))
+    //    .catch(err => console.log('Error:', err));
     
 
     if (!!token){
@@ -90,7 +95,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
             imagen: imagen.path,
             imgformat: imgformat[1],
             usuarioId: getUser.id,
-            estado: jsonResponse,
+            estado: response,
         });
 
         if (newAnalysisRequest) {
@@ -103,7 +108,7 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
         res.json({message: "Debes ingresar una imagen"});
     };
 
-    res.json(jsonResponse);
+    res.json(response);
 
 
     // cloudinary.config({ 

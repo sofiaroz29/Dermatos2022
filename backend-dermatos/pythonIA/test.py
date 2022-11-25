@@ -45,11 +45,14 @@ def predict_img(img):
 
   #return res_string
 
-  if firstDigitRes == 0:
-    return "maligno"
-  else:
-    return "benigno"
+  r = " "
 
+  if firstDigitRes == "0":
+    r = "maligno"
+  else:
+    r = "benigno"
+
+  return r 
   #return firstDigitRes
 
 #receive_resize_img
