@@ -51,16 +51,16 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
     fetch ("http://127.0.0.1:8080/flask", {
         method: 'POST',
         headers: {
-         'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             "image": imageAsBase64,
             "filename": imagen.filename,
         })
-        }).then((response) => response.text())
-        .then((data) => console.log(data))
-        .then((result) => console.log(result))
-        .catch(err => console.log('Error:', err));
+    }).then((response) => response.text())
+    .then((data) => console.log(data))
+    .then((result) => console.log(result))
+    .catch(err => console.log('Error:', err));
         
     //     .then(response => response.json())
     //    .then(json => jsonResponse = json)  
@@ -108,20 +108,16 @@ router.post('/upload', upload.array("imagen", 1), async (req,res) =>{
         res.json({message: "Debes ingresar una imagen"});
     };
 
-    res.json(response);
-
-
     // cloudinary.config({ 
     //     cloud_name: process.env.CLOUD_NAME, 
     //     api_key: process.env.API_KEY, 
     //     api_secret: process.env.API_SECRET,
     //     secure: true
     //   });
-
-    
+   
     //const imageUrl = cloudinary.image(req.files[0].filename)
-      
- 
+
+    return response
 });
 
 
