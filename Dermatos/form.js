@@ -28,40 +28,44 @@ async function save(){
     // const response = await 
 
     // Get a reference to the file input
-    const imagen = document.querySelector('img');
+    // const imagen = document.querySelector("img");
 
-    // Listen for the change event so we can capture the file
-    imagen.addEventListener('change', (e) => {
-        // Get a reference to the file
-        const file = e.target.files[0];
+    // // Listen for the change event so we can capture the file
+    // imagen.addEventListener('change', (e) => {
+    //     // Get a reference to the file
+    //     const file = e.target.files[0];
 
-        // Encode the file using the FileReader API
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            console.log(reader.result);
-            // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
-        };
-        reader.readAsDataURL(file);
-    });
+    //     // Encode the file using the FileReader API
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         console.log(reader.result);
+    //         // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
+    //     };
+    //     reader.readAsDataURL(file);
+    // });
     
     const doc = new jsPDF();
+
     doc.setFontSize(40);
+    
     doc.setFont("helvetica", "bold");
-    doc.text("Informe", 105, 45, null, null, "center");
+    
+    doc.text("Informe", 105, 40, null, null, "center");
+    
     doc.setFontSize(23);
     doc.setFont("helvetica", "normal");
-    doc.text("Datos Personales", 30, 95); 
+    doc.text("Datos Ingresados", 30, 70); 
+    doc.line(25,75,100,75);
+    
     doc.setFontSize(20);
+    doc.text("Parte del cuerpo: " + parte, 30, 100); 
+    doc.text("Síntomas: " + sint, 30, 120);
+    doc.text("Antecedentes: " + fami, 30, 140);
+    doc.text("Conducta respecto al sol: " + sol, 30, 160);
+    doc.text("Fototipo: " + foto, 30, 180);
     doc.setFontSize(23);
-    doc.text("Evaluacion", 30, 142);
-    doc.setFontSize(20);
-    doc.text("Parte del cuerpo: " + parte, 30, 153); 
-    doc.text("Síntomas: " + sint, 30, 162);
-    doc.text("Antecedentes: " + fami, 30, 172);
-    doc.text("Conducta respecto al sol: " + sol, 30, 182);
-    doc.text("Fototipo: " + foto, 30, 192);
-    doc.addImage(imagen, 'JPEG', 30, 225, 50, 50);
-    doc.setFontSize(23);
+    
+    // doc.addImage(img.path, 'JPEG', 30, 225, 50, 50);
 
     await fetch('http://localhost:3000/api/upload', {
       method: 'POST',
@@ -72,19 +76,25 @@ async function save(){
     .then((data) => {
       if (data == 'benigno')
       {
-        doc.text("Resultado: benigno", 30, 212);
-        doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+        doc.text("Recomendacion: benigno", 30, 212);
       }
 
       else if (data == 'maligno')
       {
-        doc.text("Resultado: maligno", 30, 212);
-        doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+        doc.text("Recomendacion: maligno", 30, 212);
       }
 
     })
     .catch(err => console.log('Error:', err));  
     
+    doc.line(25,255,185,255);
+
+    doc.setFontSize(15);
+    doc.text("Aviso: Los resultados no son 100% confiables.", 30, 264);
+    doc.text("Ante cualquier duda sobre la condicion de su piel,", 45, 272);
+    doc.text("consultar con un profesional", 45, 280);
+    doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+
     
     // .then((response) => response.text())
     // .then((result) => console.log(result))
