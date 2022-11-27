@@ -22,7 +22,6 @@ async function save(){
   }
 
   // Simulate a mouse click:
-  // window.location.href = "descarga.html";
   // formData.append("imagen", fileField.files[0]);
 
   // const response = await 
@@ -76,23 +75,32 @@ async function save(){
   .then((data) => {
     if (data == 'benigno')
     {
-      doc.text("Recomendacion: benigno", 30, 212);
+      doc.text("Recomendacion: No se detectaron indicios", 30, 212) 
+      doc.text("de melanoma, aun asi recomendamos consultar ", 30, 222)
+      doc.text("con un profesional", 30, 232);
     }
 
     else if (data == 'maligno')
     {
-      doc.text("Recomendacion: maligno", 30, 212);
+      doc.text("Recomendacion: Se detectaron indicios", 30, 212) 
+      doc.text("de melanoma, recomendamos visitar ", 30, 222)
+      doc.text("con un profesional lo mas pronto posible", 30, 232);
     }
 
   })
   .catch(err => console.log('Error:', err));  
-  
-  doc.line(25,255,185,255);
+
+  window.location.href = "descarga.html";
+
+  doc.line(25,247,185,247);
 
   doc.setFontSize(15);
-  doc.text("Aviso: Los resultados no son 100% confiables.", 30, 264);
-  doc.text("Ante cualquier duda sobre la condicion de su piel,", 45, 272);
-  doc.text("consultar con un profesional", 45, 280);
+  doc.text("Aviso: Los resultados no son 100% confiables.", 30, 258);
+  doc.text("Ante cualquier duda sobre la condicion de su piel,", 45, 266);
+  doc.text("consultar con un profesional.", 45, 274);
+  doc.text("Los controles de lunares se deben hacer", 45, 282) 
+  doc.text("por lo menos una vez al año.", 45, 290);
+
   doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
 
   
