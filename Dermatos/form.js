@@ -27,6 +27,23 @@ async function save(){
 
     // const response = await 
 
+    // Get a reference to the file input
+    const imagen = document.querySelector('img');
+
+    // Listen for the change event so we can capture the file
+    imagen.addEventListener('change', (e) => {
+        // Get a reference to the file
+        const file = e.target.files[0];
+
+        // Encode the file using the FileReader API
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            console.log(reader.result);
+            // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
+        };
+        reader.readAsDataURL(file);
+    });
+    
     const doc = new jsPDF();
     doc.setFontSize(40);
     doc.setFont("helvetica", "bold");
@@ -43,6 +60,7 @@ async function save(){
     doc.text("Antecedentes: " + fami, 30, 172);
     doc.text("Conducta respecto al sol: " + sol, 30, 182);
     doc.text("Fototipo: " + foto, 30, 192);
+    doc.addImage(imagen, 'JPEG', 30, 225, 50, 50);
     doc.setFontSize(23);
 
     await fetch('http://localhost:3000/api/upload', {
@@ -50,10 +68,20 @@ async function save(){
       credentials: "include",
       body: formData,
       ContentType: 'application/json'
-    }).then(response => response.text)
-    .then((result) => {
-      doc.text("Resultado: " + result, 30, 212);
-      doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+    }).then(res => res.text())
+    .then((data) => {
+      if (data == 'benigno')
+      {
+        doc.text("Resultado: benigno", 30, 212);
+        doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+      }
+
+      else if (data == 'maligno')
+      {
+        doc.text("Resultado: maligno", 30, 212);
+        doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+      }
+
     })
     .catch(err => console.log('Error:', err));  
     
