@@ -1,5 +1,11 @@
-async function save() {
-    // const { jsPDF } = await import('/jsPDF');
+async function save(){
+    // const boton = document.querySelector("btn");
+
+    // boton.addEventListener("click", btnClick, false);
+
+    // function btnClick(event) {
+    //   event.preventDefault();
+    // }
 
     let parte = document.getElementById('parte').value
     let sint = document.getElementById('sintomas').value
@@ -11,17 +17,9 @@ async function save() {
     let formData = new FormData(); // esto se hace solo porque el content type es multipart/form-data porque se sube una imagen
     const fileField = document.querySelector('input[type="file"]');
 
-    var analysis = " ";
-
-    // formData.append("parte_del_cuerpo", parte);
-    // formData.append("sintomas", sint);
-    // formData.append("antecedentes", fami)
-    // formData.append("conducta_sol", sol)
-    // formData.append("fototipos", foto)
     for (let i = 0; i < img.length; i++) {
       formData.append("imagen", img[i]);
     }
-
 
     // Simulate a mouse click:
     // window.location.href = "descarga.html";
@@ -47,19 +45,46 @@ async function save() {
     doc.text("Fototipo: " + foto, 30, 192);
     doc.setFontSize(23);
 
-
-    analysis = await fetch('http://localhost:3000/api/upload', {
+    await fetch('http://localhost:3000/api/upload', {
       method: 'POST',
       credentials: "include",
       body: formData,
       ContentType: 'application/json'
-    }).then((response) => response.text())
-    .then((data) => console.log(data))
-    .then((result) => console.log(result))
-    .catch(err => console.log('Error:', err));
+    }).then(response => response.text)
+    .then((result) => {
+      doc.text("Resultado: " + result, 30, 212);
+      doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+    })
+    .catch(err => console.log('Error:', err));  
     
-    doc.text("Resultado: " + analyisis.text(), 30, 212);
-    doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+    
+    // .then((response) => response.text())
+    // .then((result) => console.log(result))
+    // .catch(err => console.log('Error:', err));
+
+    // doc.text("Resultado: " + resultado, 30, 212);
+    // doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+
+    // .then(response => 
+    //   {
+    //     doc.text("Resultado: " + response, 30, 212);
+    //     doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+    //   })
+    
+    // .then((response) => {
+    //   doc.text("Resultado: " + response, 30, 212);
+    //   doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
+    // })
+    // .then((response) => response.text())
+    // .then((data) => console.log(data))
+    // .catch(err => console.log('Error:', err));
+
+
+
+    // const result = await fetch('http://localhost:3000/api/analysisresults')
+    
+    // doc.text("Resultado: " + resultado, 30, 212);
+    // doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
 
     // .then((response) => response.text())
     // .then((data) => console.log(data))

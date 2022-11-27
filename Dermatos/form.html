@@ -33,7 +33,7 @@
     <!-- FORM -->   
     <div class="formulario" id="nos">
         <div class="square">
-            <div class="form" id="formAnalisis" method="post" action="www.localhost:3000/upload">
+            <div class="form" id="formAnalisis">
                 <h1>COMPLETAR DATOS</h1>
                 <div class="row">
                     <input class="controls"  type="text"  name="parte" id="parte" placeholder="Parte del cuerpo"><br>
@@ -56,7 +56,7 @@
                     <input class="controls" type="file" name="foto" id="img" value="Subir Foto" accept="image/png, image/jpeg">
                 </div>     
             
-                <input class="botons" type="submit" value="Terminado" onclick="save()">   
+                <input class="botons" type="button" id="btn1" value="Terminado" onclick="save()">   
                 <script src="form.js"></script>          
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
             </div> 
