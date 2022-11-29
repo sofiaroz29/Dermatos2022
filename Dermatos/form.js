@@ -83,7 +83,7 @@ async function save(){
     else if (data == 'maligno')
     {
       doc.text("Recomendacion: Se detectaron indicios", 30, 212) 
-      doc.text("de melanoma, recomendamos visitar ", 30, 222)
+      doc.text("de melanoma, recomendamos consultar ", 30, 222)
       doc.text("con un profesional lo mas pronto posible", 30, 232);
     }
 
