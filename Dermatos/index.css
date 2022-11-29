@@ -471,7 +471,7 @@ h3{
     width: 1000px;
     padding: 30px;
     margin: auto;
-    margin-top: 5px;
+    margin-top: 35px;
     border-radius: 4px;
     box-shadow: 7px 13px 37px #000;  
     background: rgb(5, 9, 71);
@@ -606,8 +606,8 @@ h3{
     color: whitesmoke;
     margin-top: 110px;
     text-shadow: 5px 4px #1b171775;    
-    margin-left: 410px;
-    margin-right: 400px;  
+    margin-left: 330px;
+    margin-right: 300px;  
 }
 
 .descarga p{   
