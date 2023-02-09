@@ -46,24 +46,30 @@ async function save(){
     
     const doc = new jsPDF();
 
+    
+    doc.setFillColor(48, 44, 84);
+    doc.rect(0,0,220,10, 'F');
+    doc.rect(0,290,220,10, 'F');
+
+
     doc.setFontSize(40);
     
     doc.setFont("helvetica", "bold");
     
-    doc.text("Informe", 105, 40, null, null, "center");
+    doc.text("Informe", 105, 30, null, null, "center");
     
     doc.setFontSize(23);
     doc.setFont("helvetica", "normal");
-    doc.text("Datos Ingresados", 30, 70); 
-    doc.line(25,75,100,75);
+    doc.text("Datos Ingresados", 18, 55); 
+    doc.line(15,58,85,58);
     
     doc.setFontSize(20);
-    doc.text("Parte del cuerpo: " + parte, 30, 100); 
-    doc.text("Síntomas: " + sint, 30, 120);
-    doc.text("Antecedentes: " + fami, 30, 140);
-    doc.text("Conducta respecto al sol: " + sol, 30, 160);
-    doc.text("Fototipo: " + foto, 30, 180);
-    doc.setFontSize(23);
+    doc.text("Parte del cuerpo: " + parte, 18, 75); 
+    doc.text("Síntomas: " + sint, 18, 95);
+    doc.text("Antecedentes: " + fami, 18, 115);
+    doc.text("Conducta respecto al sol: " + sol, 18, 135);
+    doc.text("Fototipo: " + foto, 18, 135);
+    //doc.setFontSize(23);
     
     // doc.addImage(img.path, 'JPEG', 30, 225, 50, 50);
 
@@ -76,23 +82,32 @@ async function save(){
     .then((data) => {
       if (data == 'benigno')
       {
-        doc.text("Recomendacion: benigno", 30, 212);
+        doc.text("Recomendacion: No se detectaron indicios", 18, 190) 
+        doc.text("de melanoma, aun asi recomendamos consultar ", 18, 200)
+        doc.text("con un profesional", 18, 210);
       }
 
       else if (data == 'maligno')
       {
-        doc.text("Recomendacion: maligno", 30, 212);
+        doc.text("Recomendacion: Se detectaron indicios", 18, 190) 
+        doc.text("de melanoma, recomendamos consultar ", 18, 200)
+        doc.text("con un profesional lo mas pronto posible", 18, 210);
       }
 
     })
     .catch(err => console.log('Error:', err));  
     
-    doc.line(25,255,185,255);
+    window.location.href = "descarga.html";
+
+    
+    doc.line(25,230,185,230);
 
     doc.setFontSize(15);
-    doc.text("Aviso: Los resultados no son 100% confiables.", 30, 264);
-    doc.text("Ante cualquier duda sobre la condicion de su piel,", 45, 272);
-    doc.text("consultar con un profesional", 45, 280);
+    doc.text("Aviso: Los resultados no son 100% confiables.", 30, 243);
+    doc.text("Ante cualquier duda sobre la condicion de su piel,", 45, 250);
+    doc.text("consultar con un profesional", 45, 257);
+    doc.text("Los controles de lunares se deben hacer", 45, 264) 
+    doc.text("por lo menos una vez al año.", 45, 271);
     doc.save("Analysis-Dermatos-" + Date.now() + ".pdf");
 
     
