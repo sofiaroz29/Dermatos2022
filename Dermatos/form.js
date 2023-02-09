@@ -68,7 +68,7 @@ async function save(){
     doc.text("Síntomas: " + sint, 18, 95);
     doc.text("Antecedentes: " + fami, 18, 115);
     doc.text("Conducta respecto al sol: " + sol, 18, 135);
-    doc.text("Fototipo: " + foto, 18, 135);
+    doc.text("Fototipo: " + foto, 18, 155);
     //doc.setFontSize(23);
     
     // doc.addImage(img.path, 'JPEG', 30, 225, 50, 50);
